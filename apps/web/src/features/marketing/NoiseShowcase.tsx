@@ -45,7 +45,7 @@ export function NoiseShowcase() {
               tone="cortex"
               title={
                 <>
-                  La nuisance sonore, enfin <span className="text-cortex-300">chiffrée</span>
+                  La nuisance sonore, enfin <span className="text-[var(--tone-cortex-text)]">chiffrée</span>
                 </>
               }
               description="Partout ailleurs, une plainte pour bruit est une phrase dans un formulaire. Ici, le téléphone du déclarant devient un instrument de mesure et la plainte devient un dossier instruit."
@@ -57,7 +57,7 @@ export function NoiseShowcase() {
               <Reveal key={item.title} delay={index * 80}>
                 <div className="flex flex-col gap-2.5">
                   <span className="grid size-9 place-items-center rounded-[var(--radius-sm)] bg-cortex-400/12">
-                    <item.icon className="size-4 text-cortex-300" aria-hidden />
+                    <item.icon className="size-4 text-[var(--tone-cortex-text)]" aria-hidden />
                   </span>
                   <dt className="text-sm font-semibold text-primary">{item.title}</dt>
                   <dd className="text-[13px] leading-relaxed text-muted">{item.body}</dd>

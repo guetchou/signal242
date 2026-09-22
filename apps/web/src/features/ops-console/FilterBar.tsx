@@ -66,7 +66,7 @@ export function FilterBar({ query, onPatch, onReset, isFiltered, resultCount }: 
               className={cn(
                 'rounded-full border px-3 py-1 text-[12px] transition-colors',
                 active
-                  ? 'border-signal-400/40 bg-signal-400/12 text-signal-300'
+                  ? 'border-signal-400/40 bg-signal-400/12 text-[var(--tone-signal-text)]'
                   : 'border-subtle text-muted hover:border-default hover:text-primary',
               )}
             >
@@ -88,7 +88,7 @@ export function FilterBar({ query, onPatch, onReset, isFiltered, resultCount }: 
               className={cn(
                 'rounded-full border px-3 py-1 text-[12px] transition-colors',
                 active
-                  ? 'border-cortex-400/40 bg-cortex-400/12 text-cortex-300'
+                  ? 'border-cortex-400/40 bg-cortex-400/12 text-[var(--tone-cortex-text)]'
                   : 'border-subtle text-muted hover:border-default hover:text-primary',
               )}
             >

@@ -5,7 +5,7 @@ import { cn } from '@/lib/cn';
 const STEPS = [
   {
     icon: Radar,
-    tone: 'text-pulse-300',
+    tone: 'text-[var(--tone-pulse-text)]',
     ring: 'bg-pulse-400/12',
     step: '01',
     title: 'Capter',
@@ -16,7 +16,7 @@ const STEPS = [
   },
   {
     icon: Brain,
-    tone: 'text-cortex-300',
+    tone: 'text-[var(--tone-cortex-text)]',
     ring: 'bg-cortex-400/12',
     step: '02',
     title: 'Qualifier',
@@ -27,7 +27,7 @@ const STEPS = [
   },
   {
     icon: Route,
-    tone: 'text-ember-300',
+    tone: 'text-[var(--tone-ember-text)]',
     ring: 'bg-ember-400/12',
     step: '03',
     title: 'Acheminer',
@@ -38,7 +38,7 @@ const STEPS = [
   },
   {
     icon: BadgeCheck,
-    tone: 'text-signal-300',
+    tone: 'text-[var(--tone-signal-text)]',
     ring: 'bg-signal-400/12',
     step: '04',
     title: 'Prouver',
@@ -62,7 +62,7 @@ export function ValueChain() {
             tone="cortex"
             title={
               <>
-                Du signal brut à la <span className="text-cortex-300">preuve de résolution</span>
+                Du signal brut à la <span className="text-[var(--tone-cortex-text)]">preuve de résolution</span>
               </>
             }
             description="Les plateformes de signalement échouent rarement sur la collecte : elles échouent sur ce qui suit. Signal 242 industrialise les trois maillons que les concurrents laissent au tableur."

@@ -108,7 +108,7 @@ export function StepEvidence({ draft, error, onPatch }: StepEvidenceProps) {
             onMeasured={(measurement) => onPatch({ noise: measurement })}
           />
           {draft.noise && (
-            <p className="rounded-[var(--radius-sm)] bg-signal-400/10 px-3.5 py-2.5 text-[13px] text-signal-300">
+            <p className="rounded-[var(--radius-sm)] bg-signal-400/10 px-3.5 py-2.5 text-[13px] text-[var(--tone-signal-text)]">
               Mesure jointe : {draft.noise.laeq.toFixed(1)} dB(A) sur {draft.noise.durationS} s,
               crête à {draft.noise.lmax.toFixed(1)} dB(A).
             </p>

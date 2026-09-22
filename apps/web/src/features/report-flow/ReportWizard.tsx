@@ -105,7 +105,7 @@ export function ReportWizard({ initialCategory }: ReportWizardProps) {
         {failure && (
           <p
             role="alert"
-            className="flex items-start gap-2.5 rounded-[var(--radius-md)] bg-alert-400/10 px-4 py-3 text-[13px] text-alert-300"
+            className="flex items-start gap-2.5 rounded-[var(--radius-md)] bg-alert-400/10 px-4 py-3 text-[13px] text-[var(--tone-alert-text)]"
           >
             <TriangleAlert className="mt-0.5 size-4 shrink-0" aria-hidden />
             {failure}
@@ -124,7 +124,7 @@ export function ReportWizard({ initialCategory }: ReportWizardProps) {
 
           <div className="flex items-center gap-3">
             {blocking && step !== 'evidence' && (
-              <span className="text-[12px] text-ember-300">{blocking}</span>
+              <span className="text-[12px] text-[var(--tone-ember-text)]">{blocking}</span>
             )}
             {isLast ? (
               <Button

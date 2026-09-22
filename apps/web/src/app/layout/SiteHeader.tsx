@@ -60,7 +60,7 @@ export function SiteHeader() {
 
         <div className="ml-auto flex items-center gap-2">
           <span className="hidden items-center gap-2 rounded-full border border-subtle px-3 py-1.5 md:inline-flex">
-            <Radio className="size-3 text-signal-400" aria-hidden />
+            <Radio className="size-3 text-[var(--tone-signal-text)]" aria-hidden />
             <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted">
               Brazzaville · en service
             </span>
@@ -100,7 +100,7 @@ export function SiteHeader() {
           ))}
           <Link
             to="/signaler"
-            className="mt-2 block rounded-[var(--radius-sm)] bg-signal-400 px-3 py-2.5 text-center text-sm font-semibold text-night-950"
+            className="mt-2 block rounded-[var(--radius-sm)] bg-[var(--accent)] px-3 py-2.5 text-center text-sm font-semibold text-[var(--accent-contrast)]"
           >
             Déposer un signalement
           </Link>

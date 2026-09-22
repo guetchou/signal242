@@ -40,7 +40,7 @@ export function Hero() {
           <h1 className="max-w-[16ch] text-[2.5rem] font-extrabold leading-[1.04] sm:text-[3.4rem] lg:text-[3.8rem]">
             <span className="text-gradient">Chaque signal du terrain devient une intervention</span>{' '}
             <span className="relative inline-block">
-              <span className="text-signal-400">tracée et prouvée.</span>
+              <span className="text-[var(--tone-signal-text)]">tracée et prouvée.</span>
               <svg
                 className="absolute -bottom-2 left-0 w-full"
                 height="12"
@@ -69,7 +69,7 @@ export function Hero() {
           <ul className="flex flex-col gap-2.5">
             {PROOF_POINTS.map((point) => (
               <li key={point} className="flex items-center gap-2.5 text-sm text-secondary">
-                <CircleCheckBig className="size-4 shrink-0 text-signal-400" aria-hidden />
+                <CircleCheckBig className="size-4 shrink-0 text-[var(--tone-signal-text)]" aria-hidden />
                 {point}
               </li>
             ))}
@@ -99,7 +99,7 @@ export function Hero() {
             <div className="flex items-center justify-between gap-3">
               <div className="flex items-center gap-2">
                 <span className="grid size-8 place-items-center rounded-[var(--radius-sm)] bg-signal-400/12">
-                  <Waves className="size-4 text-signal-400" aria-hidden />
+                  <Waves className="size-4 text-[var(--tone-signal-text)]" aria-hidden />
                 </span>
                 <div>
                   <p className="text-[13px] font-semibold text-primary">Supervision territoriale</p>

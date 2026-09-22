@@ -83,7 +83,7 @@ export function StepReview({ draft }: StepReviewProps) {
 
           {draft.noise && (
             <div className="flex items-start gap-2.5">
-              <AudioWaveform className="mt-0.5 size-4 shrink-0 text-cortex-300" aria-hidden />
+              <AudioWaveform className="mt-0.5 size-4 shrink-0 text-[var(--tone-cortex-text)]" aria-hidden />
               <div>
                 <dt className="text-[11px] uppercase tracking-[0.12em] text-faint">Mesure acoustique</dt>
                 <dd className="numeric text-[13px] text-primary">
@@ -112,7 +112,7 @@ export function StepReview({ draft }: StepReviewProps) {
       </Panel>
 
       <p className="flex items-start gap-2.5 rounded-[var(--radius-md)] bg-[var(--accent-soft)] px-4 py-3 text-[12px] leading-relaxed text-secondary">
-        <ShieldCheck className="mt-0.5 size-4 shrink-0 text-signal-400" aria-hidden />
+        <ShieldCheck className="mt-0.5 size-4 shrink-0 text-[var(--tone-signal-text)]" aria-hidden />
         À la transmission, une référence de suivi vous est remise. Elle permet de consulter
         l’avancement du dossier sans créer de compte, et de confirmer la résolution une fois
         l’intervention réalisée.

@@ -61,11 +61,11 @@ export function MapPanel({ reports, now, onSelect }: MapPanelProps) {
           <li className="flex items-center gap-2 text-[12px] text-muted">
             <span className="relative flex size-2.5">
               <span
-                className={cn('absolute inline-flex size-full rounded-full bg-alert-400 opacity-60')}
+                className={cn('absolute inline-flex size-full rounded-full bg-[var(--tone-alert-mark)] opacity-60')}
                 style={{ animation: 'pulse-ring 2s ease-out infinite' }}
                 aria-hidden
               />
-              <span className="relative inline-flex size-2.5 rounded-full bg-alert-400" />
+              <span className="relative inline-flex size-2.5 rounded-full bg-[var(--tone-alert-mark)]" />
             </span>
             Halo pulsant : dossier hors délai
           </li>

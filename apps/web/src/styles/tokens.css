@@ -132,6 +132,39 @@
   --chart-grid: rgb(255 255 255 / 0.08);
   --chart-axis: rgb(255 255 255 / 0.28);
   --chart-surface: #080b14;
+
+  /* Rôles chromatiques — texte, fond et bordure par rôle.
+     Déclinés séparément pour chaque thème : une teinte lisible sur fond sombre
+     ne l'est pas sur fond clair, et l'inverse. */
+  --tone-signal-text: var(--color-signal-300);
+  --tone-signal-bg: rgb(16 217 163 / 0.12);
+  --tone-signal-border: rgb(16 217 163 / 0.3);
+  --tone-signal-mark: var(--color-signal-400);
+
+  --tone-ember-text: var(--color-ember-300);
+  --tone-ember-bg: rgb(255 182 39 / 0.12);
+  --tone-ember-border: rgb(255 182 39 / 0.3);
+  --tone-ember-mark: var(--color-ember-400);
+
+  --tone-alert-text: var(--color-alert-300);
+  --tone-alert-bg: rgb(255 77 94 / 0.12);
+  --tone-alert-border: rgb(255 77 94 / 0.3);
+  --tone-alert-mark: var(--color-alert-400);
+
+  --tone-cortex-text: var(--color-cortex-300);
+  --tone-cortex-bg: rgb(124 92 255 / 0.14);
+  --tone-cortex-border: rgb(124 92 255 / 0.32);
+  --tone-cortex-mark: var(--color-cortex-400);
+
+  --tone-pulse-text: var(--color-pulse-300);
+  --tone-pulse-bg: rgb(34 195 240 / 0.12);
+  --tone-pulse-border: rgb(34 195 240 / 0.3);
+  --tone-pulse-mark: var(--color-pulse-400);
+
+  --tone-neutral-text: var(--text-secondary);
+  --tone-neutral-bg: rgb(255 255 255 / 0.05);
+  --tone-neutral-border: var(--border-default);
+  --tone-neutral-mark: var(--color-night-400);
 }
 
 .light {
@@ -178,4 +211,36 @@
   --chart-grid: rgb(9 14 26 / 0.09);
   --chart-axis: rgb(9 14 26 / 0.32);
   --chart-surface: #ffffff;
+
+  /* Paliers assombris : sur fond clair, les teintes 300 tomberaient
+     sous le seuil de contraste exigé pour du texte. */
+  --tone-signal-text: var(--color-signal-700);
+  --tone-signal-bg: rgb(0 143 106 / 0.1);
+  --tone-signal-border: rgb(0 143 106 / 0.28);
+  --tone-signal-mark: var(--color-signal-600);
+
+  --tone-ember-text: var(--color-ember-600);
+  --tone-ember-bg: rgb(194 111 0 / 0.1);
+  --tone-ember-border: rgb(194 111 0 / 0.28);
+  --tone-ember-mark: var(--color-ember-500);
+
+  --tone-alert-text: var(--color-alert-600);
+  --tone-alert-bg: rgb(179 18 44 / 0.09);
+  --tone-alert-border: rgb(179 18 44 / 0.26);
+  --tone-alert-mark: var(--color-alert-500);
+
+  --tone-cortex-text: var(--color-cortex-600);
+  --tone-cortex-bg: rgb(72 38 184 / 0.09);
+  --tone-cortex-border: rgb(72 38 184 / 0.26);
+  --tone-cortex-mark: var(--color-cortex-500);
+
+  --tone-pulse-text: var(--color-pulse-500);
+  --tone-pulse-bg: rgb(10 159 202 / 0.1);
+  --tone-pulse-border: rgb(10 159 202 / 0.28);
+  --tone-pulse-mark: var(--color-pulse-500);
+
+  --tone-neutral-text: var(--text-secondary);
+  --tone-neutral-bg: rgb(9 14 26 / 0.04);
+  --tone-neutral-border: var(--border-default);
+  --tone-neutral-mark: var(--color-night-500);
 }

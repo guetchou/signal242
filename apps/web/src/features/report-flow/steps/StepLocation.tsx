@@ -75,7 +75,7 @@ export function StepLocation({ draft, onPatch }: StepLocationProps) {
         <div className="flex flex-col gap-3 rounded-[var(--radius-md)] surface-raised p-4">
           <div className="flex items-start gap-3">
             <span className="mt-0.5 grid size-8 shrink-0 place-items-center rounded-[var(--radius-sm)] bg-signal-400/12">
-              <MapPin className="size-4 text-signal-400" aria-hidden />
+              <MapPin className="size-4 text-[var(--tone-signal-text)]" aria-hidden />
             </span>
             <div className="min-w-0">
               <p className="text-sm font-semibold text-primary">{draft.address.label}</p>

@@ -25,7 +25,7 @@ export function CategoryGrid() {
           title={
             <>
               Dix familles d’incidents,{' '}
-              <span className="text-signal-400">quarante situations</span> qualifiées
+              <span className="text-[var(--tone-signal-text)]">quarante situations</span> qualifiées
             </>
           }
           description="Chaque famille embarque ses sous-types, son service destinataire par défaut et ses délais contractuels par niveau de gravité. Le référentiel s’adapte à l’organigramme du client sans développement."

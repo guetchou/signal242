@@ -85,7 +85,7 @@ export function Pricing() {
           eyebrow="Modèle économique"
           title={
             <>
-              Un abonnement, <span className="text-signal-400">pas un projet informatique</span>
+              Un abonnement, <span className="text-[var(--tone-signal-text)]">pas un projet informatique</span>
             </>
           }
           description="Pas de développement spécifique facturé au forfait, pas de dépendance à un prestataire unique. Un abonnement annuel, une mise en service courte et une clause de réversibilité des données."
@@ -129,7 +129,7 @@ export function Pricing() {
                 {plan.features.map((feature) => (
                   <li key={feature} className="flex items-start gap-2.5 text-[13px] text-secondary">
                     <Check
-                      className={cn('mt-0.5 size-4 shrink-0', plan.featured ? 'text-signal-400' : 'text-muted')}
+                      className={cn('mt-0.5 size-4 shrink-0', plan.featured ? 'text-[var(--tone-signal-text)]' : 'text-muted')}
                       aria-hidden
                     />
                     {feature}

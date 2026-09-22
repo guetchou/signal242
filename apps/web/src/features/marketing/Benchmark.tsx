@@ -74,9 +74,9 @@ const CRITERIA: readonly Criterion[] = [
 ];
 
 const SUPPORT_META: Record<Support, { icon: typeof Check; className: string; label: string }> = {
-  yes: { icon: Check, className: 'text-signal-400', label: 'Couvert' },
-  partial: { icon: Minus, className: 'text-ember-400', label: 'Partiel' },
-  no: { icon: X, className: 'text-alert-400', label: 'Absent' },
+  yes: { icon: Check, className: 'text-[var(--tone-signal-text)]', label: 'Couvert' },
+  partial: { icon: Minus, className: 'text-[var(--tone-ember-text)]', label: 'Partiel' },
+  no: { icon: X, className: 'text-[var(--tone-alert-text)]', label: 'Absent' },
 };
 
 export function Benchmark() {
@@ -88,7 +88,7 @@ export function Benchmark() {
           tone="ember"
           title={
             <>
-              Ce que le marché ne fait <span className="text-ember-300">pas encore</span>
+              Ce que le marché ne fait <span className="text-[var(--tone-ember-text)]">pas encore</span>
             </>
           }
           description="Le signalement citoyen est un marché mature sur la collecte et immature sur la preuve. Les écarts ci-dessous constituent le positionnement défendable de Signal 242."
@@ -113,11 +113,11 @@ export function Benchmark() {
                       scope="col"
                       className={cn(
                         'px-4 py-4 text-center text-[12px] font-semibold',
-                        index === 0 ? 'text-signal-300' : 'text-muted',
+                        index === 0 ? 'text-[var(--tone-signal-text)]' : 'text-muted',
                       )}
                     >
                       {index === 0 && (
-                        <span className="mb-1 block font-mono text-[9px] uppercase tracking-[0.18em] text-signal-400">
+                        <span className="mb-1 block font-mono text-[9px] uppercase tracking-[0.18em] text-[var(--tone-signal-text)]">
                           Notre offre
                         </span>
                       )}

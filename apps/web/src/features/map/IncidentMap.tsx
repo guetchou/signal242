@@ -81,6 +81,17 @@ export function IncidentMap({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // Passage en mode dégradé : la carte est détruite explicitement. Conserver
+  // un contexte WebGL inutilisable fuirait de la mémoire et laisserait ses
+  // contrôles superposés à la vue de repli.
+  useEffect(() => {
+    if (!degraded) return;
+    mapRef.current?.remove();
+    mapRef.current = null;
+    markersRef.current = [];
+    pickMarkerRef.current = null;
+  }, [degraded]);
+
   // Sélection de position au clic.
   useEffect(() => {
     const map = mapRef.current;

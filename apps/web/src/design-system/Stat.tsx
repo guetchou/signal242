@@ -69,8 +69,8 @@ export function Stat({
             className={cn(
               'inline-flex items-center gap-0.5 rounded-full px-1.5 py-0.5 text-[11px] font-semibold',
               improving === null && 'surface-raised text-muted',
-              improving === true && 'bg-signal-400/12 text-signal-300',
-              improving === false && 'bg-alert-400/12 text-alert-300',
+              improving === true && 'bg-signal-400/12 text-[var(--tone-signal-text)]',
+              improving === false && 'bg-alert-400/12 text-[var(--tone-alert-text)]',
             )}
           >
             <DeltaIcon className="size-3" aria-hidden />

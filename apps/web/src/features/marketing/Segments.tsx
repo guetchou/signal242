@@ -69,7 +69,7 @@ export function Segments() {
           eyebrow="Marchés adressés"
           title={
             <>
-              Une plateforme, <span className="text-signal-400">trois modèles d’achat</span>
+              Une plateforme, <span className="text-[var(--tone-signal-text)]">trois modèles d’achat</span>
             </>
           }
           description="Le socle technique est commun ; le paramétrage, le vocabulaire et les engagements de service diffèrent par segment. C’est ce qui permet de vendre au même coût marginal à une mairie, à une préfecture et à un site industriel."
@@ -96,9 +96,9 @@ export function Segments() {
                   <segment.icon
                     className={cn(
                       'size-5',
-                      segment.tone === 'signal' && 'text-signal-300',
-                      segment.tone === 'alert' && 'text-alert-300',
-                      segment.tone === 'cortex' && 'text-cortex-300',
+                      segment.tone === 'signal' && 'text-[var(--tone-signal-text)]',
+                      segment.tone === 'alert' && 'text-[var(--tone-alert-text)]',
+                      segment.tone === 'cortex' && 'text-[var(--tone-cortex-text)]',
                     )}
                     aria-hidden
                   />
@@ -124,9 +124,9 @@ export function Segments() {
                     <dt
                       className={cn(
                         'numeric shrink-0 text-sm font-bold',
-                        segment.tone === 'signal' && 'text-signal-300',
-                        segment.tone === 'alert' && 'text-alert-300',
-                        segment.tone === 'cortex' && 'text-cortex-300',
+                        segment.tone === 'signal' && 'text-[var(--tone-signal-text)]',
+                        segment.tone === 'alert' && 'text-[var(--tone-alert-text)]',
+                        segment.tone === 'cortex' && 'text-[var(--tone-cortex-text)]',
                       )}
                     >
                       {item.metric}

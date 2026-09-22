@@ -36,8 +36,8 @@ export function StepIndicator({ current, onNavigate, completed }: StepIndicatorP
               <span
                 className={cn(
                   'grid size-7 shrink-0 place-items-center rounded-full border text-[11px] font-semibold transition-colors',
-                  done && 'border-signal-400/50 bg-signal-400/15 text-signal-300',
-                  active && !done && 'border-signal-400 bg-signal-400 text-night-950',
+                  done && 'border-signal-400/50 bg-signal-400/15 text-[var(--tone-signal-text)]',
+                  active && !done && 'border-[var(--tone-signal-border)] bg-[var(--accent)] text-[var(--accent-contrast)]',
                   !done && !active && 'border-subtle text-faint',
                 )}
               >

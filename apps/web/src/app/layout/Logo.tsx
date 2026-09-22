@@ -32,7 +32,7 @@ export function Logo({ className, compact }: LogoProps) {
       {!compact && (
         <span className="flex flex-col leading-none">
           <span className="font-display text-[15px] font-bold tracking-tight text-primary">
-            Signal<span className="text-signal-400">242</span>
+            Signal<span className="text-[var(--tone-signal-text)]">242</span>
           </span>
           <span className="mt-0.5 font-mono text-[9px] uppercase tracking-[0.2em] text-faint">
             Civic Response OS

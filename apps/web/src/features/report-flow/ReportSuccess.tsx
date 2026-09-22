@@ -36,7 +36,7 @@ export function ReportSuccess({ report, onRestart }: ReportSuccessProps) {
 
       <div className="relative mx-auto flex max-w-lg flex-col items-center gap-5 py-6">
         <span className="grid size-16 place-items-center rounded-full bg-signal-400/15 glow-accent">
-          <Check className="size-8 text-signal-400" aria-hidden />
+          <Check className="size-8 text-[var(--tone-signal-text)]" aria-hidden />
         </span>
 
         <div>
@@ -49,14 +49,14 @@ export function ReportSuccess({ report, onRestart }: ReportSuccessProps) {
         <div className="w-full rounded-[var(--radius-md)] surface-sunken p-4">
           <p className="text-[11px] uppercase tracking-[0.14em] text-faint">Votre référence de suivi</p>
           <div className="mt-2 flex items-center justify-center gap-2.5">
-            <p className="numeric text-2xl font-bold text-signal-300">{report.reference}</p>
+            <p className="numeric text-2xl font-bold text-[var(--tone-signal-text)]">{report.reference}</p>
             <button
               type="button"
               onClick={() => void copyReference()}
               className="grid size-8 place-items-center rounded-[var(--radius-sm)] border border-subtle text-muted transition-colors hover:border-strong hover:text-primary"
               aria-label="Copier la référence"
             >
-              {copied ? <Check className="size-3.5 text-signal-400" aria-hidden /> : <Copy className="size-3.5" aria-hidden />}
+              {copied ? <Check className="size-3.5 text-[var(--tone-signal-text)]" aria-hidden /> : <Copy className="size-3.5" aria-hidden />}
             </button>
           </div>
           <p className="mt-2 text-[11px] text-faint">

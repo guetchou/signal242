@@ -47,7 +47,7 @@ export function TrustSection() {
             tone="pulse"
             title={
               <>
-                Les six questions que pose <span className="text-pulse-300">tout acheteur public</span>
+                Les six questions que pose <span className="text-[var(--tone-pulse-text)]">tout acheteur public</span>
               </>
             }
             description="Aucune de ces réponses n’est une option payante : elles constituent le socle livré avec chaque déploiement."
@@ -59,7 +59,7 @@ export function TrustSection() {
             <Reveal key={pillar.title} delay={index * 70}>
               <Panel elevation="raised" className="h-full">
                 <span className="grid size-10 place-items-center rounded-[var(--radius-md)] bg-pulse-400/12">
-                  <pillar.icon className="size-5 text-pulse-300" aria-hidden />
+                  <pillar.icon className="size-5 text-[var(--tone-pulse-text)]" aria-hidden />
                 </span>
                 <h3 className="mt-4 text-[15px] font-semibold text-primary">{pillar.title}</h3>
                 <p className="mt-2 text-[13px] leading-relaxed text-muted">{pillar.body}</p>

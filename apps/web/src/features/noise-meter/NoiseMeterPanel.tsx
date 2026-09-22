@@ -121,7 +121,7 @@ export function NoiseMeterPanel({
                 <dd
                   className={cn(
                     'numeric mt-1 text-lg font-bold',
-                    item.highlight ? 'text-ember-300' : 'text-primary',
+                    item.highlight ? 'text-[var(--tone-ember-text)]' : 'text-primary',
                   )}
                 >
                   {item.value}
@@ -153,7 +153,7 @@ export function NoiseMeterPanel({
       {running && (
         <div className="mt-5 h-1 overflow-hidden rounded-full surface-sunken">
           <div
-            className="h-full rounded-full bg-signal-400 transition-[width] duration-100 ease-linear"
+            className="h-full rounded-full bg-[var(--tone-signal-mark)] transition-[width] duration-100 ease-linear"
             style={{ width: `${Math.min((frame.elapsedS / durationS) * 100, 100)}%` }}
           />
         </div>
@@ -161,7 +161,7 @@ export function NoiseMeterPanel({
 
       {hasData && !running && (
         <p className="mt-5 flex items-start gap-2 rounded-[var(--radius-sm)] bg-[var(--accent-soft)] px-3.5 py-3 text-[13px] leading-relaxed text-secondary">
-          <Info className="mt-0.5 size-4 shrink-0 text-signal-400" aria-hidden />
+          <Info className="mt-0.5 size-4 shrink-0 text-[var(--tone-signal-text)]" aria-hidden />
           <span>
             <strong className="font-semibold text-primary">{VERDICT_LABELS[verdict]}. </strong>
             {frame.laeq.toFixed(1)} dB(A) moyennés sur {Math.round(frame.elapsedS)} s, soit{' '}
@@ -173,7 +173,7 @@ export function NoiseMeterPanel({
       )}
 
       {(fallback || status === 'denied') && (
-        <p className="mt-3 flex items-start gap-2 rounded-[var(--radius-sm)] bg-ember-400/10 px-3.5 py-3 text-[13px] leading-relaxed text-ember-300">
+        <p className="mt-3 flex items-start gap-2 rounded-[var(--radius-sm)] bg-ember-400/10 px-3.5 py-3 text-[13px] leading-relaxed text-[var(--tone-ember-text)]">
           <MicOff className="mt-0.5 size-4 shrink-0" aria-hidden />
           Microphone indisponible : la démonstration se poursuit avec un signal simulé. Sur le
           terrain, autorisez l’accès au micro pour obtenir une mesure réelle.

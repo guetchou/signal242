@@ -95,7 +95,7 @@ export function ConsoleWorkspace() {
       )}
 
       {error && (
-        <Panel elevation="flat" className="flex items-start gap-2.5 text-[13px] text-alert-300">
+        <Panel elevation="flat" className="flex items-start gap-2.5 text-[13px] text-[var(--tone-alert-text)]">
           <TriangleAlert className="mt-0.5 size-4 shrink-0" aria-hidden />
           {error}
         </Panel>

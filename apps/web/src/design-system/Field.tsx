@@ -22,13 +22,13 @@ export function Field({ label, hint, error, required, children, className }: Fie
       <span className="flex items-baseline justify-between gap-3">
         <span className="text-sm font-medium text-secondary">
           {label}
-          {required && <span className="ml-1 text-alert-400">*</span>}
+          {required && <span className="ml-1 text-[var(--tone-alert-text)]">*</span>}
         </span>
         {hint && <span className="text-[11px] text-faint">{hint}</span>}
       </span>
       {children}
       {error && (
-        <span role="alert" className="text-xs font-medium text-alert-300">
+        <span role="alert" className="text-xs font-medium text-[var(--tone-alert-text)]">
           {error}
         </span>
       )}

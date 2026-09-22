@@ -77,7 +77,7 @@ export function ReportRow({ report, now, selected, onSelect }: ReportRowProps) {
                 </span>
               )}
               {report.noise && (
-                <span className="numeric flex items-center gap-1 text-cortex-300">
+                <span className="numeric flex items-center gap-1 text-[var(--tone-cortex-text)]">
                   <AudioWaveform className="size-3" aria-hidden />
                   {report.noise.laeq.toFixed(0)} dB
                 </span>

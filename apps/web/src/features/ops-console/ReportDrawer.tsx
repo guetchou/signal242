@@ -125,7 +125,7 @@ export function ReportDrawer({ report, now, onClose, onStatusChange, busy }: Rep
 
       {report.noise && noisePeriod && (
         <section className="rounded-[var(--radius-md)] border border-cortex-400/25 bg-cortex-400/[0.07] p-4">
-          <h3 className="flex items-center gap-2 text-[13px] font-semibold text-cortex-300">
+          <h3 className="flex items-center gap-2 text-[13px] font-semibold text-[var(--tone-cortex-text)]">
             <AudioWaveform className="size-4" aria-hidden />
             Relevé acoustique
           </h3>
@@ -163,7 +163,7 @@ export function ReportDrawer({ report, now, onClose, onStatusChange, busy }: Rep
               {index < report.timeline.length - 1 && (
                 <span className="absolute left-[5px] top-3 h-full w-px bg-[var(--border-default)]" aria-hidden />
               )}
-              <span className="relative mt-1.5 size-[11px] shrink-0 rounded-full border-2 border-[var(--surface-base)] bg-signal-400" />
+              <span className="relative mt-1.5 size-[11px] shrink-0 rounded-full border-2 border-[var(--surface-base)] bg-[var(--tone-signal-mark)]" />
               <div className="min-w-0 flex-1">
                 <p className="text-[13px] font-medium text-primary">{event.label}</p>
                 <p className="text-[11px] text-faint">

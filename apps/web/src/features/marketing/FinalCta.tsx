@@ -46,7 +46,7 @@ export function FinalCta() {
             {MILESTONES.map((milestone, index) => (
               <li key={milestone.step} className="relative flex flex-col gap-2 text-center">
                 <span className="mx-auto grid size-8 place-items-center rounded-full border border-signal-400/40 bg-signal-400/10">
-                  <span className="numeric text-[11px] font-bold text-signal-300">{index + 1}</span>
+                  <span className="numeric text-[11px] font-bold text-[var(--tone-signal-text)]">{index + 1}</span>
                 </span>
                 <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-faint">
                   {milestone.step}
