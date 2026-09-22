@@ -121,6 +121,15 @@ confirmation, qui alimente le score de priorité et peut déclencher une
 remontée de gravité. La règle de remontée est déjà implémentée dans
 `domain/report/sla.ts`.
 
+## 5 bis. Hébergement sur sous-chemin
+
+L'application fonctionne à la racine d'un domaine comme sur un sous-chemin
+(`/signal242/` sur GitHub Pages). Trois points le permettent :
+`VITE_BASE_PATH` alimente la base Vite, le routeur en dérive son `basename`,
+et les emplacements média résolvent leurs fichiers depuis
+`import.meta.env.BASE_URL`. Les polices auto-hébergées déclarent des URL
+relatives à leur propre feuille de styles, donc valides dans les deux cas.
+
 ## 6. Dette assumée
 
 | Point | État | Échéance |
@@ -130,6 +139,7 @@ remontée de gravité. La règle de remontée est déjà implémentée dans
 | Étalonnage du sonomètre | Décalage persisté, procédure guidée non implémentée | Avant toute revendication d'opposabilité |
 | Canaux USSD et WhatsApp | Spécifiés, non implémentés | Dépendent d'un accord opérateur |
 | Tests d'interface | Absents ; seul le domaine est couvert | Tests de parcours sur le dépôt et la file |
+| Fond cartographique public | Tuiles OpenStreetMap, sans contrat d'usage | Style vectoriel hébergé par le client via `VITE_MAP_STYLE_URL` |
 
 Cette dette est documentée plutôt que masquée : chaque ligne correspond à un
 engagement pris dans la documentation commerciale et doit être tenue avant

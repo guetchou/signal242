@@ -1,5 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
-import maplibregl, { Map as MapLibreMap, Marker } from 'maplibre-gl';
+import {
+  Map as MapLibreMap,
+  Marker,
+  NavigationControl,
+  type MapMouseEvent,
+} from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import type { GeoPoint } from '@/domain/report/types';
 import { cn } from '@/lib/cn';
@@ -53,7 +58,7 @@ export function MapCanvas({
 
     let timeout: ReturnType<typeof setTimeout>;
     try {
-      const map = new maplibregl.Map({
+      const map = new MapLibreMap({
         container: containerRef.current,
         style: MAP_STYLE_URL ?? OSM_RASTER_STYLE,
         center,
@@ -68,7 +73,7 @@ export function MapCanvas({
 
       map.on('load', () => clearTimeout(timeout));
       map.on('error', () => setDegraded(true));
-      map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'bottom-right');
+      map.addControl(new NavigationControl({ showCompass: false }), 'bottom-right');
     } catch {
       setDegraded(true);
     }
@@ -97,7 +102,7 @@ export function MapCanvas({
   useEffect(() => {
     const map = mapRef.current;
     if (!map || !onPick) return;
-    const handler = (event: maplibregl.MapMouseEvent) => {
+    const handler = (event: MapMouseEvent) => {
       onPick({ lat: event.lngLat.lat, lng: event.lngLat.lng, accuracyM: 25 });
     };
     map.on('click', handler);
@@ -113,7 +118,7 @@ export function MapCanvas({
     if (!map || degraded) return;
     markersRef.current.forEach((marker) => marker.remove());
     markersRef.current = points.map((point) =>
-      new maplibregl.Marker({ element: buildMarkerElement(point) })
+      new Marker({ element: buildMarkerElement(point) })
         .setLngLat([point.position.lng, point.position.lat])
         .addTo(map),
     );
@@ -126,7 +131,7 @@ export function MapCanvas({
     pickMarkerRef.current?.remove();
     pickMarkerRef.current = null;
     if (!selected) return;
-    pickMarkerRef.current = new maplibregl.Marker({ color: '#10d9a3' })
+    pickMarkerRef.current = new Marker({ color: '#10d9a3' })
       .setLngLat([selected.lng, selected.lat])
       .addTo(map);
     map.easeTo({ center: [selected.lng, selected.lat], duration: 600 });

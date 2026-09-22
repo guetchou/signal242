@@ -34,18 +34,23 @@ const deferred = (element: React.ReactNode) => (
   <Suspense fallback={<RouteFallback />}>{element}</Suspense>
 );
 
-export const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <PublicLayout />,
-    children: [
-      { index: true, element: <HomePage /> },
-      { path: 'signaler', element: deferred(<ReportPage />) },
-      { path: 'suivi', element: deferred(<TrackingPage />) },
-      { path: 'carte', element: deferred(<MapPage />) },
-      { path: 'console', element: deferred(<ConsolePage />) },
-      { path: 'solution', element: deferred(<SolutionPage />) },
-      { path: '*', element: <NotFoundPage /> },
-    ],
-  },
-]);
+export const router = createBrowserRouter(
+  [
+    {
+      path: '/',
+      element: <PublicLayout />,
+      children: [
+        { index: true, element: <HomePage /> },
+        { path: 'signaler', element: deferred(<ReportPage />) },
+        { path: 'suivi', element: deferred(<TrackingPage />) },
+        { path: 'carte', element: deferred(<MapPage />) },
+        { path: 'console', element: deferred(<ConsolePage />) },
+        { path: 'solution', element: deferred(<SolutionPage />) },
+        { path: '*', element: <NotFoundPage /> },
+      ],
+    },
+  ],
+  // Préfixe d'hébergement sur sous-chemin. `BASE_URL` porte un slash final que
+  // react-router n'attend pas.
+  { basename: import.meta.env.BASE_URL.replace(/\/$/, '') },
+);

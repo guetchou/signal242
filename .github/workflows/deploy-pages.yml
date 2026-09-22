@@ -1,0 +1,96 @@
+# Déploiement de la démonstration sur GitHub Pages.
+#
+# Aucun compte tiers, aucun jeton à créer : GitHub s'authentifie lui-même. Il
+# suffit d'activer Pages une fois dans les réglages du dépôt, en choisissant
+# « GitHub Actions » comme source.
+#
+# Le site est publié en mode démonstration — bandeau d'avertissement et refus
+# d'indexation — car les signalements ne parviennent encore à aucun service.
+
+# Les versions d'actions retenues sont des majeures stables et largement
+# déployées. Elles peuvent être montées sans risque quand une nouvelle majeure
+# sort ; ce fichier est le seul endroit à modifier.
+
+name: Déployer la démonstration
+
+on:
+  push:
+    branches: [main, claude/signal-242-app-5qf5t7]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Un déploiement à la fois, sans annuler celui qui est en cours : interrompre
+# une publication en vol laisserait le site dans un état indéterminé.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  construire:
+    name: Construire le site
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Récupérer le dépôt
+        uses: actions/checkout@v4
+
+      - name: Installer Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Configurer Pages
+        uses: actions/configure-pages@v5
+
+      - name: Installer les dépendances
+        run: npm ci
+
+      - name: Construire
+        env:
+          # Pages sert le site sous /<dépôt>/, sauf domaine personnalisé. La
+          # variable de dépôt PAGES_BASE_PATH permet de forcer « / » dans ce cas.
+          VITE_BASE_PATH: ${{ vars.PAGES_BASE_PATH || format('/{0}/', github.event.repository.name) }}
+          # Mode démonstration : à ne passer à « false » que le jour où les
+          # signalements sont réellement reçus et traités.
+          VITE_DEMO_MODE: ${{ vars.DEMO_MODE || 'true' }}
+        run: npm run build
+
+      - name: Préparer le repli des routes profondes
+        run: |
+          # Pages ne sait pas réécrire les URL. Il sert en revanche 404.html
+          # pour tout chemin inconnu : en y plaçant la page d'entrée, le
+          # routage côté client reprend la main et /signaler répond
+          # correctement, y compris en accès direct ou après rechargement.
+          cp apps/web/dist/index.html apps/web/dist/404.html
+
+      - name: Empêcher le traitement Jekyll
+        run: |
+          # Sans ce marqueur, Pages ignore les fichiers et dossiers commençant
+          # par un tiret bas, que produisent certains outils de construction.
+          touch apps/web/dist/.nojekyll
+
+      - name: Téléverser l'artefact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: apps/web/dist
+
+  deployer:
+    name: Publier
+    needs: construire
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    environment:
+      name: github-pages
+      url: ${{ steps.publication.outputs.page_url }}
+
+    steps:
+      - name: Déployer sur Pages
+        id: publication
+        uses: actions/deploy-pages@v4

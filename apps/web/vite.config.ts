@@ -52,7 +52,13 @@ export default defineConfig(({ mode }) => {
   // sûr, celui où le site s'annonce comme une démonstration.
   const isDemo = process.env['VITE_DEMO_MODE'] !== 'false';
 
+  // Chemin de base. Vaut « / » pour un hébergement à la racine d'un domaine,
+  // « /signal242/ » pour GitHub Pages. Les chemins de polices et de médias en
+  // dépendent : ils passent tous par `import.meta.env.BASE_URL`.
+  const base = process.env['VITE_BASE_PATH'] ?? '/';
+
   return {
+    base,
     plugins: [react(), tailwindcss(), demoModePlugin(isDemo)],
     resolve: {
       alias: { '@': fileURLToPath(new URL('./src', import.meta.url)) },

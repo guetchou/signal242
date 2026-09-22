@@ -23,9 +23,16 @@ export type SceneSubject =
 
 export type MediaShape = 'wide' | 'landscape' | 'portrait' | 'circle' | 'square';
 
+/**
+ * Résout un fichier de `public/media/` depuis le chemin de base de
+ * l'application : le site doit fonctionner aussi bien à la racine d'un domaine
+ * que sur un sous-chemin.
+ */
+const mediaUrl = (file: string): string => `${import.meta.env.BASE_URL}media/${file}`;
+
 export interface MediaSlot {
   readonly id: string;
-  /** Chemin attendu sous `public/`, sans extension imposée. */
+  /** URL résolue du fichier attendu sous `public/media/`. */
   readonly src: string;
   readonly shape: MediaShape;
   readonly subject: SceneSubject;
@@ -38,7 +45,7 @@ export interface MediaSlot {
 export const MEDIA = {
   heroCity: {
     id: 'heroCity',
-    src: '/media/hero-ville.jpg',
+    src: mediaUrl('hero-ville.jpg'),
     shape: 'wide',
     subject: 'skyline',
     alt: 'Vue de la ville en fin de journée, avenues plantées et circulation',
@@ -47,7 +54,7 @@ export const MEDIA = {
   },
   citizenPortrait: {
     id: 'citizenPortrait',
-    src: '/media/citoyenne-portrait.jpg',
+    src: mediaUrl('citoyenne-portrait.jpg'),
     shape: 'portrait',
     subject: 'people',
     alt: 'Habitante signalant un problème depuis son téléphone dans la rue',
@@ -56,7 +63,7 @@ export const MEDIA = {
   },
   agentCrew: {
     id: 'agentCrew',
-    src: '/media/equipe-intervention.jpg',
+    src: mediaUrl('equipe-intervention.jpg'),
     shape: 'landscape',
     subject: 'crew',
     alt: 'Équipe technique municipale en intervention sur la voirie',
@@ -65,7 +72,7 @@ export const MEDIA = {
   },
   nightStreet: {
     id: 'nightStreet',
-    src: '/media/rue-nuit.jpg',
+    src: mediaUrl('rue-nuit.jpg'),
     shape: 'landscape',
     subject: 'night',
     alt: 'Rue de quartier la nuit, éclairage public partiellement éteint',
@@ -74,7 +81,7 @@ export const MEDIA = {
   },
   riverBank: {
     id: 'riverBank',
-    src: '/media/berge-fleuve.jpg',
+    src: mediaUrl('berge-fleuve.jpg'),
     shape: 'landscape',
     subject: 'river',
     alt: 'Berge du fleuve après la saison des pluies',
@@ -83,7 +90,7 @@ export const MEDIA = {
   },
   districtFace: {
     id: 'districtFace',
-    src: '/media/visage-quartier.jpg',
+    src: mediaUrl('visage-quartier.jpg'),
     shape: 'circle',
     subject: 'people',
     alt: 'Habitant d’un quartier de la ville',
@@ -92,7 +99,7 @@ export const MEDIA = {
   },
   marketStreet: {
     id: 'marketStreet',
-    src: '/media/rue-marche.jpg',
+    src: mediaUrl('rue-marche.jpg'),
     shape: 'square',
     subject: 'street',
     alt: 'Rue commerçante animée en journée',

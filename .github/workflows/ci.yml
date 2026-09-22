@@ -1,0 +1,68 @@
+# Intégration continue.
+#
+# Exécutée sur chaque poussée et chaque demande de fusion. Elle reproduit ce
+# qu'un contributeur lance localement avant de pousser : vérification de types,
+# tests du domaine, construction de production. Une construction qui échoue ici
+# n'atteindra pas l'hébergeur.
+
+name: Intégration continue
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+  workflow_dispatch:
+
+# Une seule exécution par branche : une poussée rapide annule la précédente
+# plutôt que de faire la queue.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verifier:
+    name: Vérifier et construire
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Récupérer le dépôt
+        uses: actions/checkout@v4
+
+      - name: Installer Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Installer les dépendances
+        run: npm ci
+
+      - name: Auditer les dépendances
+        # Une faille critique dans une dépendance servie au navigateur ne doit
+        # pas atteindre un site public sans que personne ne l'ait vue.
+        run: npm audit --audit-level=high
+
+      - name: Vérifier les types
+        run: npm run typecheck
+
+      - name: Exécuter les tests
+        run: npm run test
+
+      - name: Construire
+        run: npm run build
+
+      - name: Contrôler les garde-fous du mode démonstration
+        run: |
+          # La construction par défaut doit produire un site non indexable :
+          # tant que les signalements ne parviennent à personne, un oubli de
+          # configuration ne doit pas aboutir à un guichet fictif référencé.
+          if ! grep -q 'Disallow: /' apps/web/dist/robots.txt; then
+            echo '::error::robots.txt n’interdit pas l’indexation alors que le mode démonstration est actif.'
+            exit 1
+          fi
+          if ! grep -q 'name="robots" content="noindex' apps/web/dist/index.html; then
+            echo '::error::La balise robots de non-indexation est absente de index.html.'
+            exit 1
+          fi
+          echo 'Garde-fous du mode démonstration présents.'

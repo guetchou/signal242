@@ -110,7 +110,37 @@ collectivité. La liste est volontairement vide : publier un numéro erroné
 serait plus dangereux que n'en publier aucun. Tant qu'elle l'est, l'interface
 renvoie vers « le numéro d'urgence de votre localité » sans en citer.
 
-### Mise en ligne de la démonstration, pas à pas
+### Déploiement automatique (GitHub Actions)
+
+Deux workflows sont fournis dans `.github/workflows/`.
+
+**`ci.yml` — intégration continue.** S'exécute à chaque poussée et chaque
+demande de fusion : audit des dépendances, vérification de types, tests,
+construction, puis contrôle que les garde-fous du mode démonstration sont bien
+présents dans le site produit. Aucune configuration.
+
+**`deploy-pages.yml` — publication sur GitHub Pages.** Aucun compte tiers,
+aucun jeton à créer : GitHub s'authentifie lui-même.
+
+1. Dans les réglages du dépôt, ouvrir **Settings → Pages** et choisir
+   **GitHub Actions** comme source. C'est la seule manipulation requise.
+2. Pousser sur `main` ou sur la branche de travail : le site est publié sur
+   `https://<compte>.github.io/signal242/`.
+
+Deux variables de dépôt facultatives, sous **Settings → Secrets and variables
+→ Actions → Variables** :
+
+| Variable | Effet |
+|---|---|
+| `PAGES_BASE_PATH` | Forcer `/` en cas de domaine personnalisé ; sinon le nom du dépôt est utilisé |
+| `DEMO_MODE` | Passer à `false` le jour de la mise en service réelle |
+
+GitHub Pages ne sait pas réécrire les URL. Le workflow contourne cette limite
+en publiant la page d'entrée également comme `404.html` : Pages la sert pour
+tout chemin inconnu, le routage côté client reprend la main, et `/signaler`
+répond correctement en accès direct comme après rechargement.
+
+### Mise en ligne manuelle, pas à pas
 
 1. Ouvrir un compte sur Netlify, Vercel ou Cloudflare Pages — l'offre gratuite
    suffit pour une démonstration.
