@@ -2,15 +2,35 @@
 
 ## 1. Intention
 
-L'interface assume une densité et une profondeur visuelles élevées. Ce choix
-n'est pas décoratif : le produit se vend à des décideurs qui jugent la
-crédibilité d'un outil d'exploitation à son apparence de salle de supervision.
-Un minimalisme neutre signalerait un formulaire ; la profondeur signale un
-système.
+Deux registres cohabitent, et leur frontière est explicite.
 
-Cette densité reste soumise à trois contraintes non négociables : contraste
-conforme, navigation clavier intégrale, et respect des préférences de mouvement
-réduit.
+**Les écrans de travail** — accueil, dépôt, suivi, carte, console — sont sobres
+et denses. Fond clair, surfaces blanches détachées par une bordure nette et une
+ombre courte, un seul accent, aucun ornement. Dans un formulaire ou une file de
+traitement, un halo coloré est du bruit : il concurrence l'information qu'il
+est censé mettre en valeur.
+
+**La page d'offre** (`/solution`) assume un registre de démonstration
+commerciale : halos, grain, dégradés de titre, bandeau d'activité. Ce registre
+s'adresse à un décideur qui juge la crédibilité d'un outil d'exploitation à sa
+première impression, et il est circonscrit à cette seule page.
+
+Les deux registres sont soumis aux mêmes contraintes non négociables :
+contraste conforme, navigation clavier intégrale, respect des préférences de
+mouvement réduit.
+
+## 1 bis. Thème
+
+Le thème clair est le thème principal. C'est celui d'une application métier
+consultée en journée, sur des postes d'agents et des téléphones en extérieur.
+Le thème sombre reste disponible — permanences, usage nocturne — et la
+préférence est conservée.
+
+L'élévation se lit à l'inverse d'un thème à l'autre : en clair, une surface
+élevée est **plus claire** que le fond, détachée par une bordure et une ombre
+courte. Transposer la surface translucide grise du thème sombre aplatirait
+toute la hiérarchie. Les voiles d'interaction suivent la même logique :
+éclaircir sur fond sombre, assombrir sur fond clair.
 
 ## 2. Jetons
 

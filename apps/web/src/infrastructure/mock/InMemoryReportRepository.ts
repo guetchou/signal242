@@ -7,6 +7,7 @@
  */
 
 import { getCategory } from '@/domain/report/categories';
+import { distanceM } from '@/domain/report/geo';
 import { computeDueDate } from '@/domain/report/sla';
 import type { Report, ReportDraft, ReportStatus } from '@/domain/report/types';
 import type { ReportQuery, ReportRepository } from '@/domain/ports';
@@ -24,6 +25,7 @@ function normalize(value: string): string {
 }
 
 function matches(report: Report, query: ReportQuery): boolean {
+  if (query.near && distanceM(report.position, query.near.point) > query.near.radiusM) return false;
   if (query.categoryIds?.length && !query.categoryIds.includes(report.categoryId)) return false;
   if (query.statuses?.length && !query.statuses.includes(report.status)) return false;
   if (query.severities?.length && !query.severities.includes(report.severity)) return false;

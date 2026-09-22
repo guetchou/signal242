@@ -161,6 +161,43 @@ function buildTimeline(
 }
 
 /**
+ * Position d'un signalement.
+ *
+ * Une dispersion uniforme dans le quartier serait fausse : les signalements se
+ * concentrent sur des points noirs — un carrefour défoncé, un dépôt sauvage
+ * installé, un tronçon non éclairé. Deux tiers des dossiers sont donc rattachés
+ * à l'un des quelques foyers du quartier, avec la dispersion d'un relevé GPS,
+ * le reste étant réparti alentour. C'est cette concentration qui rend le
+ * rapprochement de doublons utile, dans la démonstration comme en exploitation.
+ */
+function positionFor(
+  random: () => number,
+  district: { lat: number; lng: number },
+  index: number,
+): { lat: number; lng: number; accuracyM: number } {
+  const HOTSPOTS_PER_DISTRICT = 3;
+  const accuracyM = Math.round(4 + random() * 22);
+
+  if (random() < 0.62) {
+    // Foyer déterministe du quartier : les mêmes points reviennent.
+    const hotspot = index % HOTSPOTS_PER_DISTRICT;
+    const angle = (hotspot / HOTSPOTS_PER_DISTRICT) * Math.PI * 2;
+    // ~0,0005° ≈ 55 m : l'étalement d'un même point noir relevé au téléphone.
+    return {
+      lat: district.lat + Math.sin(angle) * 0.006 + (random() - 0.5) * 0.001,
+      lng: district.lng + Math.cos(angle) * 0.006 + (random() - 0.5) * 0.001,
+      accuracyM,
+    };
+  }
+
+  return {
+    lat: district.lat + (random() - 0.5) * 0.018,
+    lng: district.lng + (random() - 0.5) * 0.018,
+    accuracyM,
+  };
+}
+
+/**
  * Construit le corpus de démonstration.
  * @param count nombre de signalements à produire
  * @param now instant de référence, injecté pour la reproductibilité
@@ -206,11 +243,7 @@ export function buildSeedReports(count: number, now: Date): Report[] {
       status,
       severity,
       channel: pick(random, CHANNELS),
-      position: {
-        lat: district.lat + (random() - 0.5) * 0.018,
-        lng: district.lng + (random() - 0.5) * 0.018,
-        accuracyM: Math.round(4 + random() * 22),
-      },
+      position: positionFor(random, district, index),
       address: { label: streetAt(index), district: district.name, city: CITY },
       createdAt: createdAt.toISOString(),
       updatedAt,

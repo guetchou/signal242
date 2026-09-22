@@ -1,10 +1,10 @@
 import { useCallback, useState } from 'react';
 import { Crosshair, MapPin, TriangleAlert } from 'lucide-react';
-import { Badge, Button, TONES } from '@/design-system';
+import { Badge, Button } from '@/design-system';
 import { useServices } from '@/app/providers/ServicesProvider';
-import { getCategory } from '@/domain/report/categories';
 import type { Address, GeoPoint, ReportDraft } from '@/domain/report/types';
 import { IncidentMap } from '@/features/map/IncidentMap';
+import { NearbyReports } from '../NearbyReports';
 
 export interface StepLocationProps {
   draft: ReportDraft;
@@ -15,7 +15,6 @@ export interface StepLocationProps {
 export function StepLocation({ draft, onPatch }: StepLocationProps) {
   const { geolocation } = useServices();
   const [locating, setLocating] = useState(false);
-  const tone = TONES[getCategory(draft.categoryId).tone];
 
   const applyPosition = useCallback(
     async (position: GeoPoint) => {
@@ -59,8 +58,10 @@ export function StepLocation({ draft, onPatch }: StepLocationProps) {
                 {
                   id: 'draft',
                   position: draft.position,
-                  color: tone.hex,
-                  label: draft.title,
+                  // Marqueur neutre : la nature du problème n'est pas encore
+                  // connue à cette étape, une couleur de famille mentirait.
+                  color: '#10d9a3',
+                  label: 'Position du signalement',
                   emphasis: true,
                 },
               ]
@@ -70,6 +71,8 @@ export function StepLocation({ draft, onPatch }: StepLocationProps) {
         onPick={(position) => void applyPosition(position)}
         className="h-[22rem] w-full sm:h-[26rem]"
       />
+
+      {draft.position && <NearbyReports position={draft.position} />}
 
       {draft.address && draft.position ? (
         <div className="flex flex-col gap-3 rounded-[var(--radius-md)] surface-raised p-4">

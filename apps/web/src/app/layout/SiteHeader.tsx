@@ -6,10 +6,13 @@ import { cn } from '@/lib/cn';
 import { Logo } from './Logo';
 import { ThemeToggle } from './ThemeToggle';
 
+/**
+ * Navigation ordonnée par fréquence d'usage réelle. Le dépôt en est absent :
+ * il occupe le bouton d'action persistant, présent sur tous les écrans.
+ */
 const NAV = [
-  { to: '/', label: 'Plateforme', end: true },
-  { to: '/carte', label: 'Carte publique' },
   { to: '/suivi', label: 'Suivre un dossier' },
+  { to: '/carte', label: 'Carte publique' },
   { to: '/console', label: 'Console agent' },
 ];
 
@@ -45,7 +48,7 @@ export function SiteHeader() {
             <NavLink
               key={item.to}
               to={item.to}
-              end={item.end}
+
               className={({ isActive }) =>
                 cn(
                   'rounded-[var(--radius-sm)] px-3 py-2 text-[13px] font-medium transition-colors',
@@ -59,11 +62,15 @@ export function SiteHeader() {
         </nav>
 
         <div className="ml-auto flex items-center gap-2">
-          <span className="hidden items-center gap-2 rounded-full border border-subtle px-3 py-1.5 md:inline-flex">
+          <Link
+            to="/solution"
+            className="hidden text-[13px] font-medium text-muted transition-colors hover:text-primary md:inline-flex"
+          >
+            L’offre
+          </Link>
+          <span className="hidden items-center gap-2 rounded-full border border-subtle px-3 py-1.5 lg:inline-flex">
             <Radio className="size-3 text-[var(--tone-signal-text)]" aria-hidden />
-            <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted">
-              Brazzaville · en service
-            </span>
+            <span className="text-[12px] text-muted">Brazzaville</span>
           </span>
           <ThemeToggle />
           <Link to="/signaler" className="hidden sm:inline-flex">
@@ -87,7 +94,7 @@ export function SiteHeader() {
             <NavLink
               key={item.to}
               to={item.to}
-              end={item.end}
+
               className={({ isActive }) =>
                 cn(
                   'block rounded-[var(--radius-sm)] px-3 py-2.5 text-sm font-medium',

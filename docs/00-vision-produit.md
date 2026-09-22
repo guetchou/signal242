@@ -34,6 +34,33 @@ qu'elle traite n'est aujourd'hui mesuré nulle part. Sans cette mesure, aucun
 arbitrage budgétaire sur les services techniques n'est étayé, et la
 redevabilité vis-à-vis des administrés reste déclarative.
 
+## 1 bis. Hiérarchie des intentions à l'arrivée
+
+Le produit sert quatre populations, dont les volumes de visite diffèrent de
+trois ordres de grandeur. L'architecture des écrans suit cette réalité, non
+l'importance commerciale perçue.
+
+| Intention | Population | Volume estimé | Écran |
+|---|---|---|---|
+| Signaler maintenant | Citoyen avec un problème sous les yeux | Milliers/mois | `/` puis `/signaler` |
+| Consulter mon dossier | Citoyen ayant déjà signalé | Centaines/mois | `/` puis `/suivi` |
+| Traiter ma file | Agent | Quotidien | `/console` |
+| Être convaincu | Acheteur public ou privé | Dizaines/an | `/solution` |
+
+**Deuxième conséquence : le lieu précède la nature du problème.** L'usager
+devant un nid-de-poule sait où il se trouve ; il ne sait pas encore dans quelle
+case le ranger. Demander la catégorie d'abord lui impose de classer avant de
+pouvoir agir — et prive surtout l'étape suivante de tout rapprochement avec ce
+qui a déjà été signalé au même endroit. Dans l'ordre retenu, le choix du lieu
+déclenche l'affichage des dossiers existants à proximité et propose une
+confirmation plutôt qu'un doublon : c'est le premier service rendu aux agents,
+et il serait techniquement impossible dans l'ordre inverse.
+
+**Conséquence de conception.** L'accueil fait agir, il ne convainc pas. Placer
+le discours commercial en porte d'entrée reviendrait à servir la population la
+plus rare aux dépens des trois autres, et à imposer un temps de lecture à un
+utilisateur debout dans la rue devant un nid-de-poule.
+
 ## 2. Problème adressé
 
 Le marché du signalement citoyen est mature sur la collecte et immature sur

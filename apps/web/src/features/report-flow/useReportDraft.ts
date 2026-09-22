@@ -1,13 +1,28 @@
 import { useCallback, useMemo, useReducer } from 'react';
 import { getCategory } from '@/domain/report/categories';
-import type { CategoryId, ReportDraft, Severity } from '@/domain/report/types';
+import type { Address, CategoryId, GeoPoint, ReportDraft, Severity } from '@/domain/report/types';
 
-export const STEPS = ['category', 'location', 'evidence', 'review'] as const;
+/** Position déjà résolue, transmise depuis l'accueil pour sauter une étape. */
+export interface PrefilledPlace {
+  position: GeoPoint;
+  address: Address;
+}
+
+/**
+ * Ordre des étapes : le lieu précède la nature du problème.
+ *
+ * C'est l'ordre de l'expérience réelle — l'usager sait où il se trouve avant
+ * de savoir dans quelle case ranger ce qu'il voit — et c'est le seul ordre qui
+ * permette d'afficher les signalements déjà déposés autour du point choisi.
+ * Proposer une confirmation plutôt qu'un doublon est le premier service rendu
+ * aux agents, et il serait impossible si la catégorie venait d'abord.
+ */
+export const STEPS = ['location', 'category', 'evidence', 'review'] as const;
 export type StepId = (typeof STEPS)[number];
 
 export const STEP_META: Record<StepId, { title: string; caption: string }> = {
+  location: { title: 'Lieu', caption: 'Où se trouve le problème ?' },
   category: { title: 'Nature', caption: 'De quoi s’agit-il ?' },
-  location: { title: 'Lieu', caption: 'Où exactement ?' },
   evidence: { title: 'Preuves', caption: 'Qu’avez-vous constaté ?' },
   review: { title: 'Envoi', caption: 'Vérifiez et transmettez' },
 };
@@ -82,8 +97,11 @@ function validate(draft: ReportDraft): Record<StepId, string | null> {
  * Toute la logique de progression est ici : les composants d'étape ne font que
  * lire et émettre, ce qui les rend testables isolément et interchangeables.
  */
-export function useReportDraft(initialCategory?: CategoryId) {
-  const [draft, dispatch] = useReducer(reducer, initialCategory, (id) => createInitialDraft(id));
+export function useReportDraft(initialCategory?: CategoryId, initialPlace?: PrefilledPlace) {
+  const [draft, dispatch] = useReducer(reducer, undefined, () => {
+    const base = createInitialDraft(initialCategory);
+    return initialPlace ? { ...base, position: initialPlace.position, address: initialPlace.address } : base;
+  });
 
   const errors = useMemo(() => validate(draft), [draft]);
 

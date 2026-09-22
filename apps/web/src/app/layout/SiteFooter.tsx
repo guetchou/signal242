@@ -9,24 +9,25 @@ const COLUMNS = [
       { label: 'Carte publique', to: '/carte' },
       { label: 'Suivre un dossier', to: '/suivi' },
       { label: 'Console agent', to: '/console' },
+      { label: 'L’offre Signal 242', to: '/solution' },
     ],
   },
   {
     title: 'Segments',
     links: [
-      { label: 'Collectivités locales', to: '/#segments' },
-      { label: 'Autorités de sécurité', to: '/#segments' },
-      { label: 'Entreprises et sites', to: '/#segments' },
-      { label: 'Opérateurs de réseaux', to: '/#segments' },
+      { label: 'Collectivités locales', to: '/solution#segments' },
+      { label: 'Autorités de sécurité', to: '/solution#segments' },
+      { label: 'Entreprises et sites', to: '/solution#segments' },
+      { label: 'Opérateurs de réseaux', to: '/solution#segments' },
     ],
   },
   {
     title: 'Conformité',
     links: [
-      { label: 'Protection des données', to: '/#confiance' },
-      { label: 'Interopérabilité Open311', to: '/#confiance' },
-      { label: 'Hébergement et souveraineté', to: '/#confiance' },
-      { label: 'Accessibilité', to: '/#confiance' },
+      { label: 'Protection des données', to: '/solution#confiance' },
+      { label: 'Interopérabilité Open311', to: '/solution#confiance' },
+      { label: 'Hébergement et souveraineté', to: '/solution#confiance' },
+      { label: 'Accessibilité', to: '/solution#confiance' },
     ],
   },
 ];
@@ -38,8 +39,8 @@ export function SiteFooter() {
         <div className="flex flex-col gap-5">
           <Logo />
           <p className="max-w-xs text-sm leading-relaxed text-muted">
-            Le système nerveux des villes : capter chaque signal du terrain, le qualifier,
-            l’acheminer au bon service et prouver sa résolution.
+            Service public de signalement des incidents urbains. Dépôt sans compte, délai
+            de traitement engagé, suivi par référence.
           </p>
           <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-faint">
             Brazzaville · Pointe-Noire · Dolisie

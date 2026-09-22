@@ -16,11 +16,13 @@ function readInitialTheme(): Theme {
     const stored = localStorage.getItem(STORAGE_KEY);
     if (stored === 'light' || stored === 'dark') return stored;
   } catch {
-    // Stockage indisponible : le thème de marque s'applique.
+    // Stockage indisponible : le thème par défaut s'applique.
   }
-  // Sombre par défaut : choix d'identité assumé, adapté à l'usage nocturne des
-  // équipes de terrain. L'utilisateur bascule et sa préférence est conservée.
-  return 'dark';
+  // Clair par défaut : c'est le thème de travail d'une application métier
+  // consultée en journée, sur des postes d'agents et des téléphones en
+  // extérieur. Le thème sombre reste disponible pour les usages nocturnes
+  // et les permanences, et la préférence est conservée.
+  return 'light';
 }
 
 export function ThemeProvider({ children }: { children: ReactNode }) {

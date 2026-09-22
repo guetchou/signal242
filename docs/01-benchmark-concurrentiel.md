@@ -91,6 +91,23 @@ Cinq conclusions ont été traduites directement dans le produit.
 5. **Tous les signalements n'ont pas vocation à être publics.** D'où
    l'exclusion structurelle du canal sécurité de la carte publique.
 
+## 4 bis. Corrections issues de l'observation directe
+
+L'examen du parcours mobile de FixMyStreet a conduit à trois révisions du
+produit, sur des points où leur choix était meilleur que le nôtre.
+
+| Leur pratique | Notre erreur initiale | Correction |
+|---|---|---|
+| Le lieu demandé en premier, par géolocalisation ou par saisie | La catégorie demandée en premier | Parcours inversé ; le rapprochement de doublons devient possible |
+| Parcours explicité en quatre étapes avant l'engagement | Aucune annonce de l'effort demandé | Bloc « Comment ça se passe » sur l'accueil |
+| Action de dépôt flottante et persistante sur mobile | Bouton d'en-tête seul, perdu au défilement | Barre d'action fixe en bas d'écran |
+
+Observation générale : leur page d'accueil ne vend rien. Elle place un champ de
+localisation, explique le parcours, affiche quelques chiffres et la liste des
+derniers signalements. Le discours destiné aux collectivités et aux
+développeurs occupe des blocs distincts, en bas de page. Cette hiérarchie est
+la bonne, et nous ne l'avions pas.
+
 ## 5. Sources
 
 - [SeeClickFix — 311 Request and Work Management Software](https://seeclickfix.com/)

@@ -43,13 +43,10 @@ export function TrackingPage() {
   }, [report, reports]);
 
   return (
-    <section className="relative overflow-hidden pb-24 pt-12">
-      <div className="aurora opacity-45" aria-hidden />
-
-      <div className="relative mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+    <section className="pb-24 pt-10">
+      <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           as="h1"
-          eyebrow="Suivi citoyen"
           title="Où en est mon signalement ?"
           description="Saisissez la référence remise au dépôt. Aucun compte n’est nécessaire : la référence seule donne accès à l’avancement du dossier et à son engagement de délai."
           className="mb-8"

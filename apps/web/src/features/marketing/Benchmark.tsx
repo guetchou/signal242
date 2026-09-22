@@ -128,7 +128,7 @@ export function Benchmark() {
               </thead>
               <tbody>
                 {CRITERIA.map((criterion) => (
-                  <tr key={criterion.label} className="border-b border-subtle last:border-0 hover:bg-white/[0.02]">
+                  <tr key={criterion.label} className="border-b border-subtle last:border-0 hover:bg-[var(--state-hover)]">
                     <th scope="row" className="px-5 py-3.5 font-normal">
                       <span className="block text-[13px] font-medium text-primary">{criterion.label}</span>
                       <span className="mt-0.5 block text-[11px] text-faint">{criterion.detail}</span>

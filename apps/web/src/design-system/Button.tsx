@@ -11,10 +11,10 @@ const VARIANTS: Record<Variant, string> = {
     'shadow-[0_10px_30px_-10px_rgb(16_217_163_/_0.7)] hover:shadow-[0_16px_44px_-12px_rgb(16_217_163_/_0.85)] ' +
     'hover:brightness-110 active:brightness-95',
   secondary:
-    'glass text-primary hover:border-strong hover:bg-white/[0.07] active:bg-white/[0.04]',
+    'glass text-primary hover:border-strong hover:bg-[var(--state-hover)] active:bg-[var(--state-active)]',
   outline:
-    'border border-default text-primary hover:border-strong hover:bg-white/[0.04]',
-  ghost: 'text-secondary hover:text-primary hover:bg-white/[0.05]',
+    'border border-default text-primary hover:border-strong hover:bg-[var(--state-hover)]',
+  ghost: 'text-secondary hover:text-primary hover:bg-[var(--state-hover)]',
   danger:
     'bg-gradient-to-br from-alert-300 via-alert-400 to-alert-500 text-white font-semibold ' +
     'shadow-[0_10px_30px_-10px_rgb(255_77_94_/_0.7)] hover:brightness-110',

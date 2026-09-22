@@ -1,4 +1,5 @@
 import { Outlet, ScrollRestoration } from 'react-router-dom';
+import { MobileActionBar } from './MobileActionBar';
 import { SiteFooter } from './SiteFooter';
 import { SiteHeader } from './SiteHeader';
 
@@ -17,6 +18,10 @@ export function PublicLayout() {
         <Outlet />
       </main>
       <SiteFooter />
+      <MobileActionBar />
+      {/* Réserve d'espace sous le pied de page : la barre flottante ne doit
+          jamais recouvrir le dernier lien de la page. */}
+      <div className="h-20 sm:hidden" aria-hidden />
       <ScrollRestoration />
     </div>
   );

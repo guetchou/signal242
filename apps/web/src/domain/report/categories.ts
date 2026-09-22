@@ -194,12 +194,12 @@ export const CATEGORIES: readonly ReportCategory[] = [
     id: 'other',
     label: 'Autre situation',
     shortLabel: 'Autre',
-    description: 'Tout ce qui ne rentre dans aucune famille : qualifié manuellement.',
+    description: 'Une situation qui n’entre dans aucune famille : décrivez-la, un agent la qualifie.',
     icon: 'CircleHelp',
     tone: 'pulse',
     defaultTeam: 'Guichet unique',
     slaHours: { low: 720, moderate: 336, high: 96, critical: 24 },
-    subtypes: [{ id: 'misc', label: 'Description libre', baseSeverity: 'low' }],
+    subtypes: [{ id: 'misc', label: 'Situation non répertoriée', baseSeverity: 'low' }],
   },
 ];
 

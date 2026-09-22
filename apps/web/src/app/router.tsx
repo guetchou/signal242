@@ -8,14 +8,16 @@ import { NotFoundPage } from '@/app/pages/NotFoundPage';
 /**
  * Découpage par route.
  *
- * L'accueil est chargé d'emblée — c'est la porte d'entrée commerciale et sa
- * vitesse d'affichage conditionne la première impression. Les autres écrans,
- * plus lourds et visités plus tard, sont chargés à la demande.
+ * L'accueil est chargé d'emblée : c'est l'écran d'action, celui dont dépend le
+ * délai avant le premier geste utile. Les autres écrans, plus lourds et
+ * atteints plus tard, sont chargés à la demande — la page de présentation de
+ * l'offre comprise, la plus lourde et la moins visitée.
  */
 const ReportPage = lazy(() => import('@/app/pages/ReportPage').then((m) => ({ default: m.ReportPage })));
 const TrackingPage = lazy(() => import('@/app/pages/TrackingPage').then((m) => ({ default: m.TrackingPage })));
 const MapPage = lazy(() => import('@/app/pages/MapPage').then((m) => ({ default: m.MapPage })));
 const ConsolePage = lazy(() => import('@/app/pages/ConsolePage').then((m) => ({ default: m.ConsolePage })));
+const SolutionPage = lazy(() => import('@/app/pages/SolutionPage').then((m) => ({ default: m.SolutionPage })));
 
 function RouteFallback() {
   return (
@@ -42,6 +44,7 @@ export const router = createBrowserRouter([
       { path: 'suivi', element: deferred(<TrackingPage />) },
       { path: 'carte', element: deferred(<MapPage />) },
       { path: 'console', element: deferred(<ConsolePage />) },
+      { path: 'solution', element: deferred(<SolutionPage />) },
       { path: '*', element: <NotFoundPage /> },
     ],
   },

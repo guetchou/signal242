@@ -6,9 +6,18 @@
  * l'API Signal 242 la remplacera sans toucher une seule vue.
  */
 
-import type { Report, ReportDraft, CategoryId, ReportStatus, Severity } from './report/types';
+import type {
+  Report,
+  ReportDraft,
+  CategoryId,
+  GeoPoint,
+  ReportStatus,
+  Severity,
+} from './report/types';
 
 export interface ReportQuery {
+  /** Restreint aux signalements situés dans un rayon autour d'un point. */
+  readonly near?: { readonly point: GeoPoint; readonly radiusM: number };
   readonly categoryIds?: readonly CategoryId[];
   readonly statuses?: readonly ReportStatus[];
   readonly severities?: readonly Severity[];

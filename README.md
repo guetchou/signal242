@@ -8,13 +8,29 @@ La proposition de valeur ne porte pas sur la collecte — le marché la maîtris
 mais sur ce qui la suit : la qualification automatique, l'acheminement au bon
 service, l'engagement de délai et la preuve de résolution.
 
+## Écrans
+
+| Route | Rôle | Public |
+|---|---|---|
+| `/` | Écran d'action : choisir un type de problème, suivre un dossier, voir l'activité du territoire | Citoyens |
+| `/signaler` | Parcours de dépôt en quatre étapes | Citoyens |
+| `/suivi` | Consultation d'un dossier par sa référence | Citoyens |
+| `/carte` | Carte publique, canal sécurité exclu | Citoyens |
+| `/console` | Supervision, file priorisée, carte opérationnelle | Agents |
+| `/solution` | Présentation de l'offre | Décideurs |
+
+L'accueil est un écran d'action, non une page de présentation : l'usager qui
+arrive veut signaler ou consulter un dossier. Le discours destiné aux
+acheteurs vit sur `/solution`, atteint par un lien.
+
 ## Périmètre fonctionnel
 
 | Domaine | Contenu |
 |---|---|
 | Familles d'incidents | Voirie, éclairage, déchets, nuisances sonores, sécurité, eau, énergie, bâti, espaces verts, divers — 40 situations qualifiées |
 | Mesure acoustique | LAeq pondéré A, LAmax, L90, émergence, seuil par période réglementaire |
-| Parcours citoyen | Dépôt en quatre étapes, sans compte, avec référence de suivi |
+| Parcours citoyen | Dépôt en quatre étapes — lieu, nature, preuves, envoi — sans compte, avec référence de suivi |
+| Rapprochement de doublons | Signalements existants affichés dès le choix du lieu, confirmation proposée à la place d'un nouveau dossier |
 | Console d'exploitation | Supervision chiffrée, file priorisée, carte opérationnelle, fiche de dossier |
 | Transparence | Carte publique, canal sécurité cloisonné, journal d'audit |
 

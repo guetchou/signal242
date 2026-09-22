@@ -56,6 +56,22 @@ comportement.
 produit les indicateurs d'une capture microphone, d'un fichier audio importé
 ou, demain, d'un capteur fixe déployé sur mobilier urbain.
 
+### D3 bis — Le lieu avant la nature, et le rapprochement qui en découle
+L'ordre des étapes du dépôt n'est pas une préférence d'ergonomie : il
+conditionne une fonction. Le lieu connu en premier permet d'interroger le
+dépôt sur un rayon (`ReportQuery.near`, distance orthodromique dans
+`domain/report/geo.ts`) et de proposer la confirmation d'un dossier existant.
+Sont proposés tous les dossiers **ouverts** dans le rayon, sans limite d'âge —
+un incident encore en intervention reste le même incident — plus les dossiers
+**clos récemment**, dont la réapparition au même endroit est une information
+que le service qui est intervenu doit recevoir.
+
+Corollaire sur le jeu de démonstration : une dispersion uniforme des positions
+dans chaque quartier rendait la fonction inopérante, faute de grappes. Le
+générateur concentre désormais deux tiers des signalements sur quelques points
+noirs par quartier, ce qui est à la fois plus fidèle au terrain et nécessaire
+pour que le rapprochement soit démontrable.
+
 ### D4 — Repli systématique sur les dépendances externes
 Le microphone peut être refusé, le fond cartographique inaccessible, le
 presse-papiers bloqué. Chaque dépendance externe dispose d'un chemin dégradé

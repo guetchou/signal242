@@ -51,13 +51,10 @@ export function MapPage() {
   const recent = useMemo(() => visible.slice(0, 12), [visible]);
 
   return (
-    <section className="relative pb-24 pt-12">
-      <div className="absolute inset-x-0 top-0 h-72 grid-tech opacity-50" aria-hidden />
-
-      <div className="relative mx-auto max-w-[84rem] px-4 sm:px-6 lg:px-8">
+    <section className="pb-24 pt-10">
+      <div className="mx-auto max-w-[84rem] px-4 sm:px-6 lg:px-8">
         <SectionHeading
           as="h1"
-          eyebrow="Transparence"
           title="Carte publique des signalements"
           description="Tout ce que la collectivité reçoit et traite, à l’exception du canal sécurité, cloisonné pour protéger les déclarants."
           className="mb-8"

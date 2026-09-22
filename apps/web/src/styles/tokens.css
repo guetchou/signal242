@@ -110,6 +110,10 @@
   --accent: var(--color-signal-400);
   --accent-contrast: var(--color-night-950);
   --accent-soft: rgb(16 217 163 / 0.14);
+  /* Surface d'appel discrète : teinte l'arrière-plan d'un bloc d'action sans
+     le transformer en bandeau publicitaire. */
+  --accent-surface: rgb(16 217 163 / 0.08);
+  --accent-border: rgb(16 217 163 / 0.24);
 
   --glow-accent: 0 0 0 1px rgb(16 217 163 / 0.35), 0 18px 48px -12px rgb(16 217 163 / 0.45);
   --glow-alert: 0 0 0 1px rgb(255 77 94 / 0.35), 0 18px 48px -12px rgb(255 77 94 / 0.4);
@@ -120,6 +124,15 @@
   --shadow-panel: 0 1px 0 0 rgb(255 255 255 / 0.05) inset, 0 24px 60px -28px rgb(0 0 0 / 0.85);
 
   --grid-line: rgb(255 255 255 / 0.045);
+
+  /* Voiles d'interaction : éclaircir sur fond sombre, assombrir sur fond clair.
+     Un voile blanc transposé tel quel serait invisible en thème clair. */
+  --state-hover: rgb(255 255 255 / 0.06);
+  --state-active: rgb(255 255 255 / 0.03);
+
+  /* Paliers d'arrivée du dégradé de titre. */
+  --gradient-mid: var(--color-signal-300);
+  --gradient-end: var(--color-pulse-300);
 
   /* Séries de visualisation — validées (bande de clarté OKLCH, plancher de
      chroma, séparation daltonisme, contraste fond) pour la surface sombre.
@@ -167,39 +180,58 @@
   --tone-neutral-mark: var(--color-night-400);
 }
 
+/*
+ * Thème clair — thème principal de l'application.
+ *
+ * L'élévation s'y lit à l'inverse du thème sombre : une surface élevée est
+ * plus claire que le fond, pas plus foncée. `surface-raised` est donc un blanc
+ * opaque posé sur un canevas gris, détaché par une bordure nette et une ombre
+ * courte. Une surface translucide grise, transposée du thème sombre, aplatirait
+ * toute la hiérarchie.
+ */
 .light {
   color-scheme: light;
 
-  --surface-canvas: #f4f6fb;
+  --surface-canvas: #f5f7fa;
   --surface-base: #ffffff;
-  --surface-raised: rgb(9 14 26 / 0.025);
-  --surface-overlay: rgb(255 255 255 / 0.92);
-  --surface-sunken: rgb(9 14 26 / 0.04);
+  --surface-raised: #ffffff;
+  --surface-overlay: rgb(255 255 255 / 0.9);
+  --surface-sunken: #eef1f6;
   --surface-inverse: var(--color-night-900);
 
-  --border-subtle: rgb(9 14 26 / 0.08);
-  --border-default: rgb(9 14 26 / 0.14);
-  --border-strong: rgb(9 14 26 / 0.26);
+  --border-subtle: #e4e8ef;
+  --border-default: #d3d9e3;
+  --border-strong: #adb6c4;
 
-  --text-primary: var(--color-night-900);
-  --text-secondary: var(--color-night-700);
-  --text-muted: var(--color-night-500);
-  --text-faint: var(--color-night-400);
+  --text-primary: #10151f;
+  --text-secondary: #39435a;
+  --text-muted: #5d6981;
+  --text-faint: #7d889c;
   --text-inverse: #ffffff;
 
   --accent: var(--color-signal-600);
   --accent-contrast: #ffffff;
-  --accent-soft: rgb(0 143 106 / 0.1);
+  --accent-soft: rgb(0 143 106 / 0.09);
+  --accent-surface: rgb(0 143 106 / 0.06);
+  --accent-border: rgb(0 143 106 / 0.2);
 
-  --glow-accent: 0 0 0 1px rgb(0 143 106 / 0.25), 0 18px 40px -16px rgb(0 143 106 / 0.35);
-  --glow-alert: 0 0 0 1px rgb(229 29 58 / 0.25), 0 18px 40px -16px rgb(229 29 58 / 0.3);
+  --glow-accent: 0 0 0 1px rgb(0 143 106 / 0.2), 0 12px 28px -14px rgb(0 143 106 / 0.3);
+  --glow-alert: 0 0 0 1px rgb(229 29 58 / 0.2), 0 12px 28px -14px rgb(229 29 58 / 0.25);
 
-  --shadow-sm: 0 1px 2px rgb(9 14 26 / 0.06);
-  --shadow-md: 0 10px 24px -12px rgb(9 14 26 / 0.18);
-  --shadow-lg: 0 30px 60px -24px rgb(9 14 26 / 0.24);
-  --shadow-panel: 0 1px 0 0 rgb(255 255 255 / 0.9) inset, 0 20px 50px -30px rgb(9 14 26 / 0.3);
+  /* Ombres courtes et peu opaques : sur fond clair, une ombre large et sombre
+     salit la page au lieu de détacher la surface. */
+  --shadow-sm: 0 1px 2px rgb(16 21 31 / 0.05);
+  --shadow-md: 0 2px 6px -1px rgb(16 21 31 / 0.07), 0 8px 20px -12px rgb(16 21 31 / 0.12);
+  --shadow-lg: 0 4px 12px -2px rgb(16 21 31 / 0.08), 0 20px 44px -20px rgb(16 21 31 / 0.16);
+  --shadow-panel: 0 1px 2px rgb(16 21 31 / 0.04), 0 6px 16px -10px rgb(16 21 31 / 0.1);
 
-  --grid-line: rgb(9 14 26 / 0.04);
+  --grid-line: rgb(16 21 31 / 0.035);
+
+  --state-hover: rgb(16 21 31 / 0.04);
+  --state-active: rgb(16 21 31 / 0.07);
+
+  --gradient-mid: var(--color-signal-600);
+  --gradient-end: var(--color-pulse-500);
 
   /* Mêmes rôles, pas une inversion automatique : chaque palier est resélectionné
      puis revalidé contre la surface claire. */

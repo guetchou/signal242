@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="fr" class="dark">
+<html lang="fr" class="light">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <meta name="theme-color" content="#05070d" />
+    <meta name="theme-color" content="#f5f7fa" />
     <title>Signal 242 — Le système nerveux des villes</title>
     <meta
       name="description"
@@ -17,11 +17,11 @@
       (() => {
         try {
           const stored = localStorage.getItem('signal242.theme');
-          const theme = stored === 'light' || stored === 'dark' ? stored : 'dark';
+          const theme = stored === 'light' || stored === 'dark' ? stored : 'light';
           document.documentElement.classList.toggle('dark', theme === 'dark');
           document.documentElement.classList.toggle('light', theme === 'light');
         } catch {
-          document.documentElement.classList.add('dark');
+          document.documentElement.classList.add('light');
         }
       })();
     </script>

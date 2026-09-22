@@ -9,10 +9,17 @@ import { StepCategory } from './steps/StepCategory';
 import { StepEvidence } from './steps/StepEvidence';
 import { StepLocation } from './steps/StepLocation';
 import { StepReview } from './steps/StepReview';
-import { STEPS, STEP_META, useReportDraft, type StepId } from './useReportDraft';
+import {
+  STEPS,
+  STEP_META,
+  useReportDraft,
+  type PrefilledPlace,
+  type StepId,
+} from './useReportDraft';
 
 export interface ReportWizardProps {
   initialCategory?: CategoryId;
+  initialPlace?: PrefilledPlace;
 }
 
 /**
@@ -22,12 +29,15 @@ export interface ReportWizardProps {
  * la navigation entre étapes et l'appel au dépôt. Chaque étape reste une vue
  * autonome, testable et remplaçable.
  */
-export function ReportWizard({ initialCategory }: ReportWizardProps) {
+export function ReportWizard({ initialCategory, initialPlace }: ReportWizardProps) {
   const { reports } = useServices();
-  const { draft, errors, setCategory, setSubtype, patch } = useReportDraft(initialCategory);
+  const { draft, errors, setCategory, setSubtype, patch } = useReportDraft(
+    initialCategory,
+    initialPlace,
+  );
 
-  const [step, setStep] = useState<StepId>('category');
-  const [visited, setVisited] = useState<StepId[]>(['category']);
+  const [step, setStep] = useState<StepId>(STEPS[0]);
+  const [visited, setVisited] = useState<StepId[]>([STEPS[0]]);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState<Report | null>(null);
   const [failure, setFailure] = useState<string | null>(null);
