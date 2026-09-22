@@ -107,6 +107,15 @@ export interface Report {
   readonly address: Address;
   readonly createdAt: string;
   readonly updatedAt: string;
+  /**
+   * Instant où le service a achevé l'intervention.
+   *
+   * Distinct de `updatedAt` : l'engagement de l'administration porte sur la
+   * résolution, non sur les événements ultérieurs — confirmation du déclarant,
+   * ajout d'une pièce, commentaire. Confondre les deux ferait basculer hors
+   * délai des dossiers traités dans les temps.
+   */
+  readonly resolvedAt?: string;
   /** Échéance contractuelle de traitement, calculée au dépôt. */
   readonly dueAt: string;
   readonly anonymous: boolean;

@@ -40,7 +40,9 @@ export function slaState(report: Report, now: Date): SlaState {
   const isClosed = report.status === 'resolved' || report.status === 'closed';
 
   if (isClosed) {
-    return new Date(report.updatedAt).getTime() <= due ? 'met' : 'breached';
+    // Repli sur updatedAt pour les dossiers antérieurs à l'introduction du champ.
+    const resolved = new Date(report.resolvedAt ?? report.updatedAt).getTime();
+    return resolved <= due ? 'met' : 'breached';
   }
   if (now.getTime() > due) return 'breached';
 

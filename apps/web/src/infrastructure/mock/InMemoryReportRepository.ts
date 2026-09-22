@@ -109,10 +109,14 @@ export class InMemoryReportRepository implements ReportRepository {
     await delay(LATENCY_MS / 2);
     return this.mutate(id, (report) => {
       const at = new Date().toISOString();
+      const settling = status === 'resolved' || status === 'closed';
       return {
         ...report,
         status,
         updatedAt: at,
+        // La résolution est horodatée une seule fois : une clôture ultérieure
+        // ne réécrit pas la date qui atteste du respect de l'engagement.
+        resolvedAt: settling ? (report.resolvedAt ?? at) : report.resolvedAt,
         timeline: [
           ...report.timeline,
           {

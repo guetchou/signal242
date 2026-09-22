@@ -108,3 +108,27 @@ describe('escalatedSeverity', () => {
     expect(escalatedSeverity({ ...BASE, severity: 'high', confirmations: 40 })).toBe('critical');
   });
 });
+
+describe('slaState et date de résolution', () => {
+  it('juge sur la fin d’intervention, pas sur une confirmation tardive', () => {
+    const closed: Report = {
+      ...BASE,
+      status: 'closed',
+      // Intervention achevée dans les temps…
+      resolvedAt: '2026-01-05T00:00:00.000Z',
+      // …mais confirmée par le citoyen bien après l’échéance.
+      updatedAt: '2026-01-30T00:00:00.000Z',
+    };
+    expect(slaState(closed, at('2026-02-01T00:00:00.000Z'))).toBe('met');
+  });
+
+  it('constate le dépassement quand l’intervention elle-même est tardive', () => {
+    const closed: Report = {
+      ...BASE,
+      status: 'closed',
+      resolvedAt: '2026-01-15T00:00:00.000Z',
+      updatedAt: '2026-01-15T00:00:00.000Z',
+    };
+    expect(slaState(closed, at('2026-02-01T00:00:00.000Z'))).toBe('breached');
+  });
+});

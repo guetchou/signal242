@@ -45,10 +45,40 @@ const STATUSES: readonly ReportStatus[] = [
   'submitted',
   'triaged',
   'in_progress',
-  'in_progress',
   'resolved',
   'closed',
+  'rejected',
 ];
+
+/**
+ * Statut corrélé à l'ancienneté.
+ *
+ * Un tirage uniforme produirait des dossiers d'un mois encore « déposés »,
+ * donc massivement hors délai : un portefeuille que nul service ne présente.
+ * Ici l'avancement suit l'âge, comme dans un service qui fonctionne, avec une
+ * minorité de dossiers en retard — la réalité d'exploitation à montrer.
+ */
+function statusForAge(random: () => number, ageHours: number): ReportStatus {
+  const draw = random();
+  if (ageHours < 12) return draw < 0.55 ? 'submitted' : 'triaged';
+  if (ageHours < 72) {
+    if (draw < 0.14) return 'submitted';
+    if (draw < 0.42) return 'triaged';
+    if (draw < 0.82) return 'in_progress';
+    return 'resolved';
+  }
+  if (ageHours < 240) {
+    if (draw < 0.1) return 'triaged';
+    if (draw < 0.28) return 'in_progress';
+    if (draw < 0.5) return 'resolved';
+    if (draw < 0.94) return 'closed';
+    return 'rejected';
+  }
+  if (draw < 0.06) return 'in_progress';
+  if (draw < 0.14) return 'resolved';
+  if (draw < 0.93) return 'closed';
+  return 'rejected';
+}
 
 const ALIASES = [
   'Citoyen anonyme',
@@ -69,6 +99,7 @@ function buildTimeline(
   status: ReportStatus,
   createdAt: Date,
   team: string,
+  dueAt: Date,
 ): TimelineEvent[] {
   const events: TimelineEvent[] = [
     {
@@ -101,23 +132,30 @@ function buildTimeline(
       detail: 'Équipe dépêchée sur site avec bon de travaux.',
     });
   }
-  if (status === 'resolved' || status === 'closed') {
+  if (status === 'resolved' || status === 'closed' || status === 'rejected') {
+    // Clôture positionnée dans la fenêtre contractuelle, sauf pour une
+    // minorité de dossiers volontairement en dépassement.
+    const window = (dueAt.getTime() - createdAt.getTime()) / 3_600_000;
+    const closingHours = random() < 0.9 ? window * (0.2 + random() * 0.62) : window * (1.05 + random() * 0.6);
     events.push({
       id: 'e3',
-      at: step(30 + random() * 60),
-      kind: 'evidence',
-      label: 'Photo de fin de chantier transmise',
+      at: step(closingHours),
+      kind: status === 'rejected' ? 'status' : 'evidence',
+      label:
+        status === 'rejected'
+          ? 'Dossier écarté : hors périmètre communal'
+          : 'Photo de fin de chantier transmise',
       actor: team,
     });
-  }
-  if (status === 'closed') {
-    events.push({
-      id: 'e4',
-      at: step(72 + random() * 40),
-      kind: 'status',
-      label: 'Clôture confirmée par le déclarant',
-      actor: 'Citoyen',
-    });
+    if (status === 'closed') {
+      events.push({
+        id: 'e4',
+        at: step(closingHours + 1 + random() * 8),
+        kind: 'status',
+        label: 'Clôture confirmée par le déclarant',
+        actor: 'Citoyen',
+      });
+    }
   }
   return events;
 }
@@ -135,19 +173,23 @@ export function buildSeedReports(count: number, now: Date): Report[] {
     const category = pick(random, CATEGORIES);
     const subtype = pick(random, category.subtypes);
     const district = pick(random, DISTRICTS);
-    const status = pick(random, STATUSES);
 
     // Gravité : ancrée sur le sous-type, avec une variation contrôlée.
     const baseIndex = SEVERITIES.indexOf(subtype.baseSeverity);
     const drift = random() < 0.25 ? (random() < 0.5 ? -1 : 1) : 0;
     const severity = SEVERITIES[Math.min(Math.max(baseIndex + drift, 0), 3)]!;
 
-    const ageHours = Math.pow(random(), 1.7) * 720;
+    // Exposant proche de 1 : légère surreprésentation des dossiers récents,
+    // sans le pic artificiel du dernier jour qu'induit une courbe trop creusée.
+    const ageHours = Math.pow(random(), 1.15) * 720;
     const createdAt = new Date(now.getTime() - ageHours * 3_600_000);
+    const status = statusForAge(random, ageHours);
     const dueAt = computeDueDate(category.id, severity, createdAt);
     const team = category.defaultTeam;
-    const timeline = buildTimeline(random, status, createdAt, team);
+    const timeline = buildTimeline(random, status, createdAt, team, dueAt);
     const updatedAt = timeline[timeline.length - 1]?.at ?? createdAt.toISOString();
+    // L'événement de fin d'intervention porte la date d'engagement tenu.
+    const resolvedAt = timeline.find((event) => event.kind === 'evidence')?.at;
 
     const anonymous = category.anonymousByDefault === true || random() < 0.22;
     const confirmations = Math.floor(Math.pow(random(), 2.4) * 48);
@@ -172,6 +214,7 @@ export function buildSeedReports(count: number, now: Date): Report[] {
       address: { label: streetAt(index), district: district.name, city: CITY },
       createdAt: createdAt.toISOString(),
       updatedAt,
+      resolvedAt,
       dueAt: dueAt.toISOString(),
       anonymous,
       reporterAlias: anonymous ? 'Déclarant protégé' : pick(random, ALIASES),
