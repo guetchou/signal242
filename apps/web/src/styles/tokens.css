@@ -1,0 +1,181 @@
+/* =============================================================================
+ * Signal 242 — Jetons de design (source unique de vérité)
+ * -----------------------------------------------------------------------------
+ * Toute couleur, rayon, ombre ou durée utilisée dans l'application doit provenir
+ * de ce fichier. Aucune valeur brute (#hex, px d'ombre) dans les composants.
+ * Thème sombre par défaut (usage terrain, nuit, économie d'écran OLED),
+ * thème clair complet pour les postes d'agents en environnement bureautique.
+ * ============================================================================= */
+
+@theme {
+  /* --- Familles typographiques ------------------------------------------- */
+  --font-display: 'Sora', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  /* --- Palette de marque -------------------------------------------------- */
+  /* Vert signal : identité, validation, état résolu. */
+  --color-signal-50: #e6fff7;
+  --color-signal-100: #b8ffe8;
+  --color-signal-200: #7cffd6;
+  --color-signal-300: #3df0bd;
+  --color-signal-400: #10d9a3;
+  --color-signal-500: #00b384;
+  --color-signal-600: #008f6a;
+  --color-signal-700: #026d53;
+  --color-signal-800: #07543f;
+  --color-signal-900: #073a2d;
+
+  /* Ambre : traitement en cours, vigilance, accent chaleureux. */
+  --color-ember-300: #ffd166;
+  --color-ember-400: #ffb627;
+  --color-ember-500: #f59300;
+  --color-ember-600: #c26f00;
+  --color-ember-900: #3d2400;
+
+  /* Rouge alerte : criticité, urgence, sécurité. */
+  --color-alert-300: #ff8a94;
+  --color-alert-400: #ff4d5e;
+  --color-alert-500: #e51d3a;
+  --color-alert-600: #b3122c;
+  --color-alert-900: #400711;
+
+  /* Violet : couche analytique, intelligence, agrégats. */
+  --color-cortex-300: #b3a4ff;
+  --color-cortex-400: #7c5cff;
+  --color-cortex-500: #5f3ae6;
+  --color-cortex-600: #4826b8;
+  --color-cortex-900: #1d0f4d;
+
+  /* Cyan : flux temps réel, capteurs, télémétrie. */
+  --color-pulse-300: #7ce0ff;
+  --color-pulse-400: #22c3f0;
+  --color-pulse-500: #0a9fca;
+
+  /* --- Neutres (nuit urbaine) --------------------------------------------- */
+  --color-night-950: #05070d;
+  --color-night-900: #080b14;
+  --color-night-850: #0b0f1a;
+  --color-night-800: #111725;
+  --color-night-700: #1a2133;
+  --color-night-600: #273043;
+  --color-night-500: #3a465e;
+  --color-night-400: #5c6a85;
+  --color-night-300: #8996ac;
+  --color-night-200: #b6c0d1;
+  --color-night-100: #dde3ed;
+  --color-night-50: #f2f5fa;
+
+  /* --- Rayons -------------------------------------------------------------- */
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-2xl: 36px;
+
+  /* --- Rythme d'animation -------------------------------------------------- */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --duration-fast: 140ms;
+  --duration-base: 260ms;
+  --duration-slow: 620ms;
+}
+
+/* =============================================================================
+ * Jetons sémantiques — indirection thème -> rôle.
+ * Les composants consomment ces variables, jamais la palette brute.
+ * ============================================================================= */
+:root,
+.dark {
+  color-scheme: dark;
+
+  --surface-canvas: var(--color-night-950);
+  --surface-base: var(--color-night-900);
+  --surface-raised: rgb(255 255 255 / 0.04);
+  --surface-overlay: rgb(12 16 26 / 0.88);
+  --surface-sunken: rgb(0 0 0 / 0.28);
+  --surface-inverse: var(--color-night-50);
+
+  --border-subtle: rgb(255 255 255 / 0.07);
+  --border-default: rgb(255 255 255 / 0.12);
+  --border-strong: rgb(255 255 255 / 0.22);
+
+  --text-primary: var(--color-night-50);
+  --text-secondary: var(--color-night-200);
+  --text-muted: var(--color-night-300);
+  --text-faint: var(--color-night-400);
+  --text-inverse: var(--color-night-950);
+
+  --accent: var(--color-signal-400);
+  --accent-contrast: var(--color-night-950);
+  --accent-soft: rgb(16 217 163 / 0.14);
+
+  --glow-accent: 0 0 0 1px rgb(16 217 163 / 0.35), 0 18px 48px -12px rgb(16 217 163 / 0.45);
+  --glow-alert: 0 0 0 1px rgb(255 77 94 / 0.35), 0 18px 48px -12px rgb(255 77 94 / 0.4);
+
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.4);
+  --shadow-md: 0 8px 24px -8px rgb(0 0 0 / 0.55);
+  --shadow-lg: 0 28px 64px -20px rgb(0 0 0 / 0.7);
+  --shadow-panel: 0 1px 0 0 rgb(255 255 255 / 0.05) inset, 0 24px 60px -28px rgb(0 0 0 / 0.85);
+
+  --grid-line: rgb(255 255 255 / 0.045);
+
+  /* Séries de visualisation — validées (bande de clarté OKLCH, plancher de
+     chroma, séparation daltonisme, contraste fond) pour la surface sombre.
+     Ordre fixe : une série garde sa teinte quel que soit le filtre appliqué. */
+  --series-1: #00a87c;
+  --series-2: #8a6bff;
+  --series-3: #c98300;
+  --series-4: #1f9ec4;
+  --series-5: #ef3450;
+  --chart-grid: rgb(255 255 255 / 0.08);
+  --chart-axis: rgb(255 255 255 / 0.28);
+  --chart-surface: #080b14;
+}
+
+.light {
+  color-scheme: light;
+
+  --surface-canvas: #f4f6fb;
+  --surface-base: #ffffff;
+  --surface-raised: rgb(9 14 26 / 0.025);
+  --surface-overlay: rgb(255 255 255 / 0.92);
+  --surface-sunken: rgb(9 14 26 / 0.04);
+  --surface-inverse: var(--color-night-900);
+
+  --border-subtle: rgb(9 14 26 / 0.08);
+  --border-default: rgb(9 14 26 / 0.14);
+  --border-strong: rgb(9 14 26 / 0.26);
+
+  --text-primary: var(--color-night-900);
+  --text-secondary: var(--color-night-700);
+  --text-muted: var(--color-night-500);
+  --text-faint: var(--color-night-400);
+  --text-inverse: #ffffff;
+
+  --accent: var(--color-signal-600);
+  --accent-contrast: #ffffff;
+  --accent-soft: rgb(0 143 106 / 0.1);
+
+  --glow-accent: 0 0 0 1px rgb(0 143 106 / 0.25), 0 18px 40px -16px rgb(0 143 106 / 0.35);
+  --glow-alert: 0 0 0 1px rgb(229 29 58 / 0.25), 0 18px 40px -16px rgb(229 29 58 / 0.3);
+
+  --shadow-sm: 0 1px 2px rgb(9 14 26 / 0.06);
+  --shadow-md: 0 10px 24px -12px rgb(9 14 26 / 0.18);
+  --shadow-lg: 0 30px 60px -24px rgb(9 14 26 / 0.24);
+  --shadow-panel: 0 1px 0 0 rgb(255 255 255 / 0.9) inset, 0 20px 50px -30px rgb(9 14 26 / 0.3);
+
+  --grid-line: rgb(9 14 26 / 0.04);
+
+  /* Mêmes rôles, pas une inversion automatique : chaque palier est resélectionné
+     puis revalidé contre la surface claire. */
+  --series-1: #00805e;
+  --series-2: #6b45f0;
+  --series-3: #9a6500;
+  --series-4: #0a7c9c;
+  --series-5: #cc1030;
+  --chart-grid: rgb(9 14 26 / 0.09);
+  --chart-axis: rgb(9 14 26 / 0.32);
+  --chart-surface: #ffffff;
+}
