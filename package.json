@@ -3,7 +3,9 @@
   "private": true,
   "version": "0.1.0",
   "description": "Signal 242 — plateforme de signalement citoyen et de gestion d'incidents urbains",
-  "workspaces": ["apps/*"],
+  "workspaces": [
+    "apps/*"
+  ],
   "scripts": {
     "dev": "npm run dev --workspace @signal242/web",
     "build": "npm run build --workspace @signal242/web",
@@ -11,5 +13,10 @@
     "test": "npm run test --workspace @signal242/web",
     "typecheck": "npm run typecheck --workspace @signal242/web"
   },
-  "engines": { "node": ">=20" }
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "playwright": "^1.63.0"
+  }
 }

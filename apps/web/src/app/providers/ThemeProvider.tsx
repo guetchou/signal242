@@ -16,9 +16,11 @@ function readInitialTheme(): Theme {
     const stored = localStorage.getItem(STORAGE_KEY);
     if (stored === 'light' || stored === 'dark') return stored;
   } catch {
-    // Stockage indisponible : on retombe sur la préférence système.
+    // Stockage indisponible : le thème de marque s'applique.
   }
-  return window.matchMedia?.('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+  // Sombre par défaut : choix d'identité assumé, adapté à l'usage nocturne des
+  // équipes de terrain. L'utilisateur bascule et sa préférence est conservée.
+  return 'dark';
 }
 
 export function ThemeProvider({ children }: { children: ReactNode }) {

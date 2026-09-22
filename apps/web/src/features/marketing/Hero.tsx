@@ -37,11 +37,8 @@ export function Hero() {
             Plateforme opérationnelle · Congo-Brazzaville
           </Badge>
 
-          <h1 className="text-[2.6rem] font-extrabold leading-[1.02] sm:text-6xl lg:text-[4.1rem]">
-            <span className="text-gradient">Chaque signal du terrain</span>
-            <br />
-            devient une intervention
-            <br />
+          <h1 className="max-w-[16ch] text-[2.5rem] font-extrabold leading-[1.04] sm:text-[3.4rem] lg:text-[3.8rem]">
+            <span className="text-gradient">Chaque signal du terrain devient une intervention</span>{' '}
             <span className="relative inline-block">
               <span className="text-signal-400">tracée et prouvée.</span>
               <svg
