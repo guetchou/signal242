@@ -1,0 +1,4 @@
+# Repli monopage pour Cloudflare Pages et Netlify.
+# Le routage étant géré côté client, toute adresse inconnue du serveur doit
+# renvoyer la page d'entrée avec un code 200, jamais une 404.
+/*  /index.html  200

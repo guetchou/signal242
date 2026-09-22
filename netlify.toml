@@ -1,0 +1,45 @@
+# Déploiement Netlify — application monopage servie à la racine du domaine.
+
+[build]
+  command = "npm run build"
+  publish = "apps/web/dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# Réécriture indispensable : le routage est géré côté client. Sans cette règle,
+# un accès direct à /signaler ou le rechargement d'une page profonde renvoie
+# une 404, l'hébergeur cherchant un fichier qui n'existe pas.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Les fichiers produits par le build portent une empreinte dans leur nom :
+# ils sont immuables et peuvent être conservés indéfiniment.
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# La page d'entrée, elle, ne doit jamais être servie depuis un cache : c'est
+# elle qui référence la version courante des fichiers.
+[[headers]]
+  for = "/index.html"
+  [headers.values]
+    Cache-Control = "no-cache"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-Frame-Options = "DENY"
+    # Géolocalisation et microphone sont requis par le produit ; tout le reste
+    # est refusé, y compris aux iframes tierces.
+    Permissions-Policy = "geolocation=(self), microphone=(self), camera=(self), payment=(), usb=()"

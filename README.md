@@ -47,6 +47,45 @@ npm run build        # build de production
 
 Node 20 ou supérieur.
 
+## Mise en ligne
+
+Le projet produit un site statique. Aucun serveur n'est requis pour l'héberger,
+mais une règle de réécriture l'est : le routage étant géré côté client, un
+accès direct à `/signaler` doit renvoyer `index.html` avec un code 200, faute
+de quoi l'hébergeur répond 404. Les configurations fournies s'en chargent.
+
+| Hébergeur | Fichier fourni | Action |
+|---|---|---|
+| Netlify | `netlify.toml` | Connecter le dépôt, rien à régler |
+| Vercel | `vercel.json` | Connecter le dépôt, rien à régler |
+| Cloudflare Pages | `apps/web/public/_redirects` | Commande `npm run build`, dossier `apps/web/dist` |
+
+Vérification locale du rendu de production, réécriture comprise :
+
+```bash
+npm run build
+npm run preview --workspace @signal242/web
+```
+
+**Ces configurations visent un déploiement à la racine d'un domaine.** Un
+hébergement sur un sous-chemin — GitHub Pages sur `/signal242/` par exemple —
+exigerait de renseigner `base` dans la configuration Vite, `basename` sur le
+routeur et de faire passer les chemins de polices et de médias par
+`import.meta.env.BASE_URL`. Ce travail n'a pas été fait : il n'a pas lieu
+d'être si le site vit à la racine.
+
+### Ce qui peut être mis en ligne aujourd'hui
+
+Une **démonstration**, pas un service opérationnel. Le service back-end
+n'existe pas encore : les signalements sont produits et conservés en mémoire
+dans le navigateur, et disparaissent au rechargement. Exposer cette version
+comme un vrai guichet de signalement induirait les habitants en erreur — ils
+déposeraient des dossiers que personne ne recevrait.
+
+Une mise en ligne publique suppose donc au minimum le jalon 1 de la feuille de
+route — socle serveur et persistance. D'ici là, le déploiement a sa place sur
+une adresse de démonstration, signalée comme telle.
+
 ## Architecture
 
 L'application suit une architecture en couches avec inversion de dépendance.
