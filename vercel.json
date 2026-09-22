@@ -3,6 +3,11 @@
   "buildCommand": "npm run build",
   "outputDirectory": "apps/web/dist",
   "framework": null,
+  "build": {
+    "env": {
+      "VITE_DEMO_MODE": "true"
+    }
+  },
   "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }],
   "headers": [
     {
@@ -16,6 +21,7 @@
     {
       "source": "/(.*)",
       "headers": [
+        { "key": "X-Robots-Tag", "value": "noindex, nofollow" },
         { "key": "X-Content-Type-Options", "value": "nosniff" },
         { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
         { "key": "X-Frame-Options", "value": "DENY" },

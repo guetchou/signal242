@@ -74,17 +74,56 @@ routeur et de faire passer les chemins de polices et de médias par
 `import.meta.env.BASE_URL`. Ce travail n'a pas été fait : il n'a pas lieu
 d'être si le site vit à la racine.
 
-### Ce qui peut être mis en ligne aujourd'hui
+### Mode démonstration
 
-Une **démonstration**, pas un service opérationnel. Le service back-end
-n'existe pas encore : les signalements sont produits et conservés en mémoire
-dans le navigateur, et disparaissent au rechargement. Exposer cette version
-comme un vrai guichet de signalement induirait les habitants en erreur — ils
-déposeraient des dossiers que personne ne recevrait.
+Le service back-end n'existe pas encore : les signalements sont produits et
+conservés en mémoire dans le navigateur, et disparaissent au rechargement.
+Exposer cette version comme un guichet réel induirait les habitants en erreur —
+ils déposeraient des dossiers que personne ne recevrait.
 
-Une mise en ligne publique suppose donc au minimum le jalon 1 de la feuille de
-route — socle serveur et persistance. D'ici là, le déploiement a sa place sur
-une adresse de démonstration, signalée comme telle.
+Le mode démonstration traite ce risque. Il est **actif par défaut** : l'oubli
+penche du côté sûr.
+
+| Garde-fou | Effet |
+|---|---|
+| Bandeau d'en-tête | Présent sur toutes les pages, réductible mais jamais supprimable |
+| Avertissement au dépôt | Rappel avant transmission, renforcé en rouge sur la famille sécurité et les gravités critiques |
+| Écran de confirmation | Intitulé « Signalement simulé », mention explicite qu'aucun service n'a été saisi |
+| `robots.txt` et balise `robots` | Indexation refusée, plus l'en-tête `X-Robots-Tag` |
+| Titre de l'onglet | Préfixé « Démonstration · » |
+
+Tous ces garde-fous dépendent d'un seul réglage, `VITE_DEMO_MODE`. Le jour de
+la mise en service, le passer à `false` les retire d'un coup — il n'est pas
+possible d'en oublier un, ni d'en désactiver un seul par mégarde.
+
+```bash
+# Vérifier le rendu réel de la démonstration
+npm run build && npm run preview --workspace @signal242/web
+
+# Vérifier ce que donnerait la bascule en service réel
+VITE_DEMO_MODE=false npm run build
+```
+
+**Avant toute mise en ligne**, renseigner `EMERGENCY_CONTACTS` dans
+`apps/web/src/config/demo.ts` avec les numéros d'urgence réels de la
+collectivité. La liste est volontairement vide : publier un numéro erroné
+serait plus dangereux que n'en publier aucun. Tant qu'elle l'est, l'interface
+renvoie vers « le numéro d'urgence de votre localité » sans en citer.
+
+### Mise en ligne de la démonstration, pas à pas
+
+1. Ouvrir un compte sur Netlify, Vercel ou Cloudflare Pages — l'offre gratuite
+   suffit pour une démonstration.
+2. Connecter le dépôt `guetchou/signal242` et sélectionner la branche à
+   déployer.
+3. Ne rien configurer : la commande de construction, le dossier de publication,
+   la réécriture monopage et `VITE_DEMO_MODE` sont lus dans `netlify.toml` ou
+   `vercel.json`. Sur Cloudflare Pages, renseigner la commande
+   `npm run build`, le dossier `apps/web/dist` et la variable
+   `VITE_DEMO_MODE=true`.
+4. Après le premier déploiement, vérifier trois points : le bandeau
+   d'avertissement s'affiche, `/robots.txt` contient `Disallow: /`, et un accès
+   direct à `/signaler` répond bien au lieu de renvoyer une 404.
 
 ## Architecture
 

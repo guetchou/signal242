@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { Check, Copy, MapPin, Search } from 'lucide-react';
 import { useState } from 'react';
 import { Badge, Button, Panel } from '@/design-system';
+import { IS_DEMO } from '@/config/demo';
 import { STATUS_CITIZEN_COPY } from '@/domain/report/status';
 import type { Report } from '@/domain/report/types';
 import { formatDateTime } from '@/lib/format';
@@ -40,9 +41,13 @@ export function ReportSuccess({ report, onRestart }: ReportSuccessProps) {
         </span>
 
         <div>
-          <h2 className="text-2xl font-bold text-primary">Signalement transmis</h2>
+          <h2 className="text-2xl font-bold text-primary">
+            {IS_DEMO ? 'Signalement simulé' : 'Signalement transmis'}
+          </h2>
           <p className="mt-2 text-[14px] leading-relaxed text-muted">
-            {STATUS_CITIZEN_COPY[report.status]}
+            {IS_DEMO
+              ? 'Voici ce que vous recevriez en conditions réelles. Sur cette version de démonstration, aucun service n’a été saisi et ce dossier disparaîtra au rechargement de la page.'
+              : STATUS_CITIZEN_COPY[report.status]}
           </p>
         </div>
 

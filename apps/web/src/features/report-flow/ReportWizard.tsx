@@ -3,6 +3,7 @@ import { ArrowLeft, ArrowRight, Send, TriangleAlert } from 'lucide-react';
 import { Button, Panel } from '@/design-system';
 import { useServices } from '@/app/providers/ServicesProvider';
 import type { CategoryId, Report } from '@/domain/report/types';
+import { DemoNotice } from './DemoNotice';
 import { ReportSuccess } from './ReportSuccess';
 import { StepIndicator } from './StepIndicator';
 import { StepCategory } from './steps/StepCategory';
@@ -100,6 +101,9 @@ export function ReportWizard({ initialCategory, initialPlace }: ReportWizardProp
           <h2 className="mt-1.5 text-2xl font-bold text-primary">{STEP_META[step].caption}</h2>
         </header>
 
+        {step === 'category' && draft.categoryId === 'security' && (
+          <DemoNotice categoryId={draft.categoryId} severity={draft.severity} />
+        )}
         {step === 'category' && (
           <StepCategory
             draft={draft}
@@ -110,7 +114,12 @@ export function ReportWizard({ initialCategory, initialPlace }: ReportWizardProp
         )}
         {step === 'location' && <StepLocation draft={draft} onPatch={patch} />}
         {step === 'evidence' && <StepEvidence draft={draft} error={errors.evidence} onPatch={patch} />}
-        {step === 'review' && <StepReview draft={draft} />}
+        {step === 'review' && (
+          <>
+            <DemoNotice categoryId={draft.categoryId} severity={draft.severity} />
+            <StepReview draft={draft} />
+          </>
+        )}
 
         {failure && (
           <p

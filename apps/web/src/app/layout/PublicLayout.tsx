@@ -1,4 +1,5 @@
 import { Outlet, ScrollRestoration } from 'react-router-dom';
+import { DemoBanner } from './DemoBanner';
 import { MobileActionBar } from './MobileActionBar';
 import { SiteFooter } from './SiteFooter';
 import { SiteHeader } from './SiteHeader';
@@ -13,6 +14,7 @@ export function PublicLayout() {
       >
         Aller au contenu principal
       </a>
+      <DemoBanner />
       <SiteHeader />
       <main id="contenu">
         <Outlet />

@@ -6,6 +6,10 @@
 
 [build.environment]
   NODE_VERSION = "22"
+  # Mode démonstration : bandeau d'avertissement permanent, refus
+  # d'indexation. À passer à "false" le jour où le service back-end reçoit
+  # réellement les signalements — et pas avant.
+  VITE_DEMO_MODE = "true"
 
 # Réécriture indispensable : le routage est géré côté client. Sans cette règle,
 # un accès direct à /signaler ou le rechargement d'une page profonde renvoie
@@ -37,6 +41,7 @@
 [[headers]]
   for = "/*"
   [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
     X-Frame-Options = "DENY"
