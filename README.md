@@ -27,6 +27,7 @@ acheteurs vit sur `/solution`, atteint par un lien.
 
 | Domaine | Contenu |
 |---|---|
+| Identité territoriale | Brazzaville la Verte, Pointe-Noire la ville océane, Dolisie la ville carrefour — accent, ambiance et compositions basculent avec le territoire |
 | Familles d'incidents | Voirie, éclairage, déchets, nuisances sonores, sécurité, eau, énergie, bâti, espaces verts, divers — 40 situations qualifiées |
 | Mesure acoustique | LAeq pondéré A, LAmax, L90, émergence, seuil par période réglementaire |
 | Parcours citoyen | Dépôt en quatre étapes — lieu, nature, preuves, envoi — sans compte, avec référence de suivi |

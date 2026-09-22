@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight, CircleCheckBig, MapPin, Play, Waves } from 'lucide-react';
-import { Badge, Button, Panel, Sparkline } from '@/design-system';
+import { Badge, Button, MediaFrame, Panel, Sparkline } from '@/design-system';
+import { useTerritory } from '@/app/providers/TerritoryProvider';
 
 const HERO_KPIS = [
   { label: 'Signalements traités', value: '128 400', trend: [42, 51, 47, 63, 71, 68, 84, 92, 101, 118] },
@@ -21,10 +22,19 @@ const PROOF_POINTS = [
  * preuve qu'elle tourne déjà. Le panneau flottant montre le produit réel plutôt
  * qu'une illustration abstraite.
  */
+const AMBIENT_CLASS = {
+  foliage: 'ambient-foliage',
+  waves: 'ambient-waves',
+  crossroads: 'ambient-crossroads',
+} as const;
+
 export function Hero() {
+  const { territory } = useTerritory();
+
   return (
     <section className="relative isolate overflow-hidden pb-20 pt-14 sm:pb-28 sm:pt-20">
-      <div className="aurora" aria-hidden />
+      <div className="ambient ambient-glow" aria-hidden />
+      <div className={`ambient ${AMBIENT_CLASS[territory.motif]}`} aria-hidden />
       <div className="absolute inset-0 grid-tech opacity-70" aria-hidden />
       <div
         className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[var(--surface-canvas)] to-transparent"
@@ -91,9 +101,23 @@ export function Hero() {
 
         <div className="relative">
           <div
-            className="absolute -inset-6 rounded-[var(--radius-2xl)] bg-gradient-to-br from-signal-400/16 via-cortex-400/10 to-transparent blur-2xl"
+            className="absolute -inset-6 rounded-[var(--radius-2xl)] bg-gradient-to-br from-[var(--accent-soft)] via-[var(--accent-surface)] to-transparent blur-2xl"
             aria-hidden
           />
+
+          {/* Terrain d'abord, tableau de bord ensuite : l'image ancre le produit
+              dans la ville, le panneau montre ce qu'il en fait. */}
+          <MediaFrame
+            media="agentCrew"
+            shape="landscape"
+            overlay="left"
+            interactive
+            className="lift relative mb-[-3.5rem] shadow-depth"
+          >
+            <p className="absolute left-5 top-5 max-w-[17rem] text-[13px] font-medium leading-snug text-white drop-shadow">
+              Une intervention engagée, tracée du signalement à la preuve de résolution.
+            </p>
+          </MediaFrame>
 
           <Panel elevation="floating" bezel className="relative grain overflow-hidden">
             <div className="flex items-center justify-between gap-3">

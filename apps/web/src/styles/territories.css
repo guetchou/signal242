@@ -1,0 +1,100 @@
+/* =============================================================================
+ * Identités territoriales
+ * -----------------------------------------------------------------------------
+ * Signal 242 se pare des couleurs du territoire qu'il sert. Chaque territoire
+ * redéfinit l'accent et l'ambiance ; il ne touche jamais aux couleurs de série
+ * des graphiques, validées globalement pour l'accessibilité, ni aux couleurs
+ * d'état, dont la signification est fixe.
+ *
+ * Tous les accents sont vérifiés à 4,5:1 au moins contre leur couleur de
+ * premier plan, dans les deux thèmes.
+ * ============================================================================= */
+
+/* --- Brazzaville, la Verte -------------------------------------------------
+ * Vert du fleuve et du feuillage. Accent clair porté au palier 700 : le
+ * palier 600 plafonnait à 4,09:1 contre du blanc, sous le seuil exigé.
+ *
+ * `--ambient-3` est la teinte profonde des compositions générées — masses
+ * bâties, sol, eau. Elle reste sombre dans les deux thèmes : c'est une
+ * couleur de matière, pas une couleur de surface.
+ */
+:root[data-territory='brazzaville'].dark,
+:root[data-territory='brazzaville'] {
+  --accent: #10d9a3;
+  --accent-contrast: #05070d;
+  --accent-soft: rgb(16 217 163 / 0.14);
+  --accent-surface: rgb(16 217 163 / 0.08);
+  --accent-border: rgb(16 217 163 / 0.24);
+  --glow-accent: 0 0 0 1px rgb(16 217 163 / 0.35), 0 18px 48px -12px rgb(16 217 163 / 0.45);
+  --ambient-1: #10d9a3;
+  --ambient-2: #22c3f0;
+  --ambient-3: #0b7f5e;
+}
+
+:root[data-territory='brazzaville'].light {
+  --accent: #026d53;
+  --accent-contrast: #ffffff;
+  --accent-soft: rgb(2 109 83 / 0.1);
+  --accent-surface: rgb(2 109 83 / 0.06);
+  --accent-border: rgb(2 109 83 / 0.2);
+  --glow-accent: 0 0 0 1px rgb(2 109 83 / 0.2), 0 12px 28px -14px rgb(2 109 83 / 0.3);
+  --ambient-1: #0f9e77;
+  --ambient-2: #2ba7c4;
+  --ambient-3: #0b4a3a;
+}
+
+/* --- Pointe-Noire, la ville océane ----------------------------------------
+ * Bleu du large et turquoise du littoral.
+ */
+:root[data-territory='pointe-noire'].dark,
+:root[data-territory='pointe-noire'] {
+  --accent: #22c3f0;
+  --accent-contrast: #05070d;
+  --accent-soft: rgb(34 195 240 / 0.14);
+  --accent-surface: rgb(34 195 240 / 0.08);
+  --accent-border: rgb(34 195 240 / 0.24);
+  --glow-accent: 0 0 0 1px rgb(34 195 240 / 0.35), 0 18px 48px -12px rgb(34 195 240 / 0.45);
+  --ambient-1: #22c3f0;
+  --ambient-2: #3df0bd;
+  --ambient-3: #0a4f78;
+}
+
+:root[data-territory='pointe-noire'].light {
+  --accent: #0d6f92;
+  --accent-contrast: #ffffff;
+  --accent-soft: rgb(13 111 146 / 0.1);
+  --accent-surface: rgb(13 111 146 / 0.06);
+  --accent-border: rgb(13 111 146 / 0.2);
+  --glow-accent: 0 0 0 1px rgb(13 111 146 / 0.2), 0 12px 28px -14px rgb(13 111 146 / 0.3);
+  --ambient-1: #1590b4;
+  --ambient-2: #2fb89e;
+  --ambient-3: #0a3c55;
+}
+
+/* --- Dolisie, la ville carrefour -------------------------------------------
+ * Ocre de latérite et vert profond des forêts du Niari.
+ */
+:root[data-territory='dolisie'].dark,
+:root[data-territory='dolisie'] {
+  --accent: #f0ae4a;
+  --accent-contrast: #05070d;
+  --accent-soft: rgb(240 174 74 / 0.14);
+  --accent-surface: rgb(240 174 74 / 0.08);
+  --accent-border: rgb(240 174 74 / 0.26);
+  --glow-accent: 0 0 0 1px rgb(240 174 74 / 0.35), 0 18px 48px -12px rgb(240 174 74 / 0.45);
+  --ambient-1: #f0ae4a;
+  --ambient-2: #3df0bd;
+  --ambient-3: #7a4a12;
+}
+
+:root[data-territory='dolisie'].light {
+  --accent: #96581a;
+  --accent-contrast: #ffffff;
+  --accent-soft: rgb(150 88 26 / 0.1);
+  --accent-surface: rgb(150 88 26 / 0.06);
+  --accent-border: rgb(150 88 26 / 0.2);
+  --glow-accent: 0 0 0 1px rgb(150 88 26 / 0.2), 0 12px 28px -14px rgb(150 88 26 / 0.3);
+  --ambient-1: #b8741f;
+  --ambient-2: #2f9e78;
+  --ambient-3: #5a3a12;
+}

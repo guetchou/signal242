@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
-import { Menu, Radio, X } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { Button } from '@/design-system';
 import { cn } from '@/lib/cn';
 import { Logo } from './Logo';
+import { TerritorySwitcher } from './TerritorySwitcher';
 import { ThemeToggle } from './ThemeToggle';
 
 /**
@@ -68,10 +69,7 @@ export function SiteHeader() {
           >
             L’offre
           </Link>
-          <span className="hidden items-center gap-2 rounded-full border border-subtle px-3 py-1.5 lg:inline-flex">
-            <Radio className="size-3 text-[var(--tone-signal-text)]" aria-hidden />
-            <span className="text-[12px] text-muted">Brazzaville</span>
-          </span>
+          <TerritorySwitcher className="hidden lg:block" />
           <ThemeToggle />
           <Link to="/signaler" className="hidden sm:inline-flex">
             <Button size="sm">Signaler</Button>

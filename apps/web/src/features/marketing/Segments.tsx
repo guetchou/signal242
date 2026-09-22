@@ -1,11 +1,13 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight, Building, Factory, ShieldCheck } from 'lucide-react';
-import { Badge, Button, Panel, Reveal, SectionHeading } from '@/design-system';
+import { Badge, Button, MediaFrame, Panel, Reveal, SectionHeading } from '@/design-system';
+import type { MediaKey } from '@/design-system';
 import { cn } from '@/lib/cn';
 
 const SEGMENTS = [
   {
     id: 'collectivites',
+    media: 'marketStreet' as MediaKey,
     icon: Building,
     tone: 'signal',
     label: 'Collectivités locales',
@@ -22,6 +24,7 @@ const SEGMENTS = [
   },
   {
     id: 'securite',
+    media: 'nightStreet' as MediaKey,
     icon: ShieldCheck,
     tone: 'alert',
     label: 'Autorités de sécurité',
@@ -38,6 +41,7 @@ const SEGMENTS = [
   },
   {
     id: 'entreprises',
+    media: 'agentCrew' as MediaKey,
     icon: Factory,
     tone: 'cortex',
     label: 'Entreprises et sites',
@@ -82,28 +86,36 @@ export function Segments() {
             <Panel
               elevation="raised"
               bezel
-              className="flex h-full flex-col gap-5 transition-transform duration-[var(--duration-base)] hover:-translate-y-1.5"
+              padded={false}
+              className="lift flex h-full flex-col overflow-hidden"
             >
-              <div className="flex items-center justify-between gap-3">
+              {/* Visuel de segment, avec le repère iconographique en médaillon
+                  à cheval sur l'image : la carte gagne un plan supplémentaire. */}
+              <div className="relative">
+                <MediaFrame
+                  media={segment.media}
+                  shape="landscape"
+                  overlay="bottom"
+                  interactive
+                  className="rounded-none"
+                />
                 <span
                   className={cn(
-                    'grid size-11 place-items-center rounded-[var(--radius-md)]',
-                    segment.tone === 'signal' && 'bg-signal-400/12',
-                    segment.tone === 'alert' && 'bg-alert-400/12',
-                    segment.tone === 'cortex' && 'bg-cortex-400/12',
+                    'absolute -bottom-5 left-5 grid size-12 place-items-center rounded-[var(--radius-md)] border-4 border-[var(--surface-base)]',
+                    segment.tone === 'signal' && 'bg-signal-400/90',
+                    segment.tone === 'alert' && 'bg-alert-400/90',
+                    segment.tone === 'cortex' && 'bg-cortex-400/90',
                   )}
                 >
-                  <segment.icon
-                    className={cn(
-                      'size-5',
-                      segment.tone === 'signal' && 'text-[var(--tone-signal-text)]',
-                      segment.tone === 'alert' && 'text-[var(--tone-alert-text)]',
-                      segment.tone === 'cortex' && 'text-[var(--tone-cortex-text)]',
-                    )}
-                    aria-hidden
-                  />
+                  <segment.icon className="size-5 text-white" aria-hidden />
                 </span>
-                <Badge tone={segment.tone}>{segment.label}</Badge>
+              </div>
+
+              <div className="flex flex-1 flex-col gap-5 p-5 pt-8 sm:p-6 sm:pt-9">
+              <div className="flex items-center justify-between gap-3">
+                <Badge tone={segment.tone} size="md">
+                  {segment.label}
+                </Badge>
               </div>
 
               <div>
@@ -140,6 +152,7 @@ export function Segments() {
                 <span className="font-semibold uppercase tracking-[0.12em]">Décideurs </span>
                 · {segment.buyers}
               </p>
+              </div>
             </Panel>
           </Reveal>
         ))}

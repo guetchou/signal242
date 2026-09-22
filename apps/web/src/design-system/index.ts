@@ -10,3 +10,4 @@ export { SectionHeading } from './SectionHeading';
 export { Stat, type StatProps } from './Stat';
 export { SEVERITY_TONE, SLA_TONE, STATUS_TONE, TONES, type Tone } from './tones';
 export * from './charts';
+export * from './media';

@@ -1,5 +1,7 @@
 @import 'tailwindcss';
 @import './tokens.css';
+@import './territories.css';
+@import './ambient.css';
 
 /* =============================================================================
  * Utilitaires sémantiques — exposent les jetons de rôle en classes Tailwind.

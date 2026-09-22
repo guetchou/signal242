@@ -64,7 +64,7 @@ export function LocateAction({ className }: { className?: string }) {
     <section
       aria-labelledby="titre-localiser"
       className={cn(
-        'rounded-[var(--radius-lg)] border border-[var(--accent-border)] bg-[var(--accent-surface)] p-5 sm:p-6',
+        '@container rounded-[var(--radius-lg)] border border-[var(--accent-border)] bg-[var(--accent-surface)] p-5 sm:p-6',
         className,
       )}
     >
@@ -76,10 +76,10 @@ export function LocateAction({ className }: { className?: string }) {
         place.
       </p>
 
-      <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-start">
+      <div className="mt-4 flex flex-col gap-3 @2xl:flex-row @2xl:items-start">
         <Button
           size="lg"
-          className="sm:shrink-0"
+          className="@2xl:shrink-0"
           loading={locating}
           iconLeft={<Crosshair className="size-4" />}
           onClick={() => void useMyPosition()}
@@ -89,7 +89,7 @@ export function LocateAction({ className }: { className?: string }) {
 
         <form
           onSubmit={(event) => void submitQuery(event)}
-          className="flex min-w-0 flex-1 flex-col gap-2 sm:flex-row"
+          className="flex min-w-0 flex-1 flex-col gap-2 @lg:flex-row"
         >
           <label className="relative min-w-0 flex-1">
             <span className="sr-only">Quartier ou arrondissement</span>
@@ -115,7 +115,7 @@ export function LocateAction({ className }: { className?: string }) {
             type="submit"
             size="lg"
             variant="outline"
-            className="sm:shrink-0"
+            className="@lg:shrink-0"
             disabled={query.trim().length === 0}
           >
             Continuer

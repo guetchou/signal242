@@ -18,10 +18,11 @@ export function Logo({ className, compact }: LogoProps) {
       <span className="relative grid size-9 place-items-center">
         <svg viewBox="0 0 36 36" className="size-9" aria-hidden>
           <defs>
+            {/* Le glyphe suit l'accent du territoire servi. */}
             <linearGradient id="logo-arc" x1="0" y1="1" x2="1" y2="0">
-              <stop offset="0%" stopColor="var(--color-signal-500)" />
-              <stop offset="60%" stopColor="var(--color-signal-300)" />
-              <stop offset="100%" stopColor="var(--color-pulse-300)" />
+              <stop offset="0%" stopColor="var(--ambient-3)" />
+              <stop offset="55%" stopColor="var(--accent)" />
+              <stop offset="100%" stopColor="var(--ambient-2)" />
             </linearGradient>
           </defs>
           <circle cx="18" cy="26" r="3.6" fill="url(#logo-arc)" />
@@ -32,7 +33,7 @@ export function Logo({ className, compact }: LogoProps) {
       {!compact && (
         <span className="flex flex-col leading-none">
           <span className="font-display text-[15px] font-bold tracking-tight text-primary">
-            Signal<span className="text-[var(--tone-signal-text)]">242</span>
+            Signal<span className="text-[var(--accent)]">242</span>
           </span>
           <span className="mt-0.5 font-mono text-[9px] uppercase tracking-[0.2em] text-faint">
             Civic Response OS

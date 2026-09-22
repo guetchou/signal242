@@ -32,6 +32,63 @@ courte. Transposer la surface translucide grise du thème sombre aplatirait
 toute la hiérarchie. Les voiles d'interaction suivent la même logique :
 éclaircir sur fond sombre, assombrir sur fond clair.
 
+## 1 ter. Identité territoriale
+
+La plateforme se pare des couleurs du territoire qu'elle sert. Ce n'est pas un
+habillage : une collectivité reconnaît son identité dans l'outil qu'elle
+déploie, un agent travaillant sur plusieurs territoires sait lequel il
+consulte, et l'argument de personnalisation distingue une offre mutualisée
+d'un produit générique.
+
+| Territoire | Surnom d'usage | Registre | Ambiance |
+|---|---|---|---|
+| Brazzaville | Brazza la Verte | Vert fleuve et feuillage | Feuillage porté par le vent |
+| Pointe-Noire | La ville océane | Bleu océan et turquoise | Houle du large |
+| Dolisie | La ville carrefour | Ocre de latérite et forêt | Rail et route qui se croisent |
+
+Un attribut `data-territory` sur la racine du document bascule l'accent et
+l'ambiance par simple cascade. Le territoire redéfinit l'accent, ses surfaces
+dérivées, le halo et les trois couleurs d'ambiance — jamais les couleurs de
+série des graphiques, validées globalement pour l'accessibilité, ni les
+couleurs d'état, dont la signification est fixe.
+
+Chaque accent est vérifié à 4,5:1 au moins contre sa couleur de premier plan,
+dans les deux thèmes. Cette vérification a corrigé un défaut existant : le
+vert de Brazzaville en thème clair plafonnait à 4,09:1 contre du blanc et a été
+porté au palier supérieur.
+
+## 1 quater. Ambiances et effets
+
+Un effet n'est retenu que pour ce qu'il dit. La pluie n'apparaît que sur
+l'eau et l'assainissement, dont les signalements suivent la saison ; le
+feuillage sur les espaces verts ; la houle sur le littoral. Ailleurs, rien.
+Les effets purement démonstratifs — vue à 360 degrés, animations d'horloge
+décoratives — ont été écartés : ils coûtent en poids et en attention sans rien
+apprendre au visiteur.
+
+Tous les effets sont décoratifs au sens de l'accessibilité, masqués aux
+technologies d'assistance, sans capture du pointeur, et neutralisés sous
+`prefers-reduced-motion`.
+
+## 1 quinquies. Emplacements média
+
+Chaque visuel du site est déclaré dans `design-system/media/registry.ts` avec
+son cadrage, son texte alternatif définitif et un brief de prise de vue. Tant
+qu'aucun fichier n'est déposé sous `public/media/`, l'emplacement rend une
+composition SVG générée à partir des couleurs du territoire — silhouette
+urbaine, berge, littoral, rue de nuit, équipe d'intervention.
+
+Deux conséquences : la mise en page se conçoit et se valide avant qu'une seule
+photographie ait été commandée, et la livraison des visuels ne demande aucune
+reprise de code. Les silhouettes humaines des compositions sont abstraites et
+sans visage : une image générée ne doit jamais passer pour la photographie
+d'une personne réelle.
+
+**Photographies à produire.** Le registre tient lieu de commande : sept
+emplacements, du plan large de ville au portrait recadrable en cercle, chacun
+avec ses dimensions et son intention. Les prises de vue montrant des personnes
+identifiables exigent un accord écrit.
+
 ## 2. Jetons
 
 `styles/tokens.css` est la source unique. Deux niveaux d'indirection :

@@ -2,8 +2,23 @@ import { Link } from 'react-router-dom';
 import { ChevronRight } from 'lucide-react';
 import { resolveIcon, TONES } from '@/design-system';
 import { CATEGORIES } from '@/domain/report/categories';
+import type { CategoryId } from '@/domain/report/types';
 import { formatDuration } from '@/lib/format';
 import { cn } from '@/lib/cn';
+
+/**
+ * Ambiances de famille.
+ *
+ * Trois familles seulement en portent une, et chacune dit quelque chose du
+ * terrain : la pluie sur l'eau et l'assainissement, dont les signalements
+ * suivent la saison ; le feuillage sur les espaces verts ; la houle sur rien
+ * d'autre que le littoral. Ailleurs, aucune animation — un effet sans motif
+ * n'est que du bruit.
+ */
+const CATEGORY_AMBIENCE: Partial<Record<CategoryId, string>> = {
+  water: 'ambient-rain',
+  greenery: 'ambient-foliage',
+};
 
 /**
  * Point d'entrée principal de l'application.
@@ -26,11 +41,22 @@ export function ActionGrid() {
                 to="/signaler"
                 state={{ categoryId: category.id }}
                 className={cn(
-                  'group flex h-full flex-col gap-3 rounded-[var(--radius-md)] border border-subtle surface-base p-4',
+                  'group relative isolate flex h-full flex-col gap-3 overflow-hidden rounded-[var(--radius-md)]',
+                  'border border-subtle surface-base p-4',
                   'transition-[border-color,box-shadow,transform] duration-[var(--duration-fast)]',
                   'hover:-translate-y-0.5 hover:border-strong hover:shadow-[var(--shadow-md)]',
                 )}
               >
+                {CATEGORY_AMBIENCE[category.id] && (
+                  <span
+                    className={cn(
+                      'ambient -z-10 opacity-0 transition-opacity duration-[var(--duration-base)]',
+                      'group-hover:opacity-100',
+                      CATEGORY_AMBIENCE[category.id],
+                    )}
+                    aria-hidden
+                  />
+                )}
                 <span className={cn('grid size-10 place-items-center rounded-[var(--radius-sm)]', tone.bg)}>
                   <Icon className={cn('size-5', tone.text)} aria-hidden />
                 </span>

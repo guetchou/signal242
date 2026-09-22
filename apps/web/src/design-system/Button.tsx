@@ -6,10 +6,11 @@ type Variant = 'primary' | 'secondary' | 'ghost' | 'danger' | 'outline';
 type Size = 'sm' | 'md' | 'lg';
 
 const VARIANTS: Record<Variant, string> = {
+  // L'action principale porte l'accent du territoire : figer une teinte de
+  // palette ici laisserait des boutons verts sur un territoire océane.
   primary:
-    'bg-gradient-to-br from-signal-300 via-signal-400 to-signal-500 text-night-950 font-semibold ' +
-    'shadow-[0_10px_30px_-10px_rgb(16_217_163_/_0.7)] hover:shadow-[0_16px_44px_-12px_rgb(16_217_163_/_0.85)] ' +
-    'hover:brightness-110 active:brightness-95',
+    'bg-[var(--accent)] text-[var(--accent-contrast)] font-semibold ' +
+    'shadow-[var(--shadow-md)] hover:brightness-110 hover:shadow-[var(--glow-accent)] active:brightness-95',
   secondary:
     'glass text-primary hover:border-strong hover:bg-[var(--state-hover)] active:bg-[var(--state-active)]',
   outline:
