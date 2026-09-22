@@ -102,8 +102,14 @@ export function NoiseMeterPanel({
         />
 
         <div className="flex flex-col gap-4">
-          <div className="h-24 rounded-[var(--radius-md)] surface-sunken p-3">
-            <SpectrumBars spectrum={frame.spectrum} active={running} className="h-full" />
+          <div className="grid h-24 place-items-center rounded-[var(--radius-md)] surface-sunken p-3">
+            {running || hasData ? (
+              <SpectrumBars spectrum={frame.spectrum} active={running} className="h-full w-full" />
+            ) : (
+              <p className="text-[12px] text-faint">
+                L’analyse spectrale s’affiche ici pendant la mesure.
+              </p>
+            )}
           </div>
 
           <dl className="grid grid-cols-3 gap-3">

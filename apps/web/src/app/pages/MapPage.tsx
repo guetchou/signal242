@@ -56,6 +56,7 @@ export function MapPage() {
 
       <div className="relative mx-auto max-w-[84rem] px-4 sm:px-6 lg:px-8">
         <SectionHeading
+          as="h1"
           eyebrow="Transparence"
           title="Carte publique des signalements"
           description="Tout ce que la collectivité reçoit et traite, à l’exception du canal sécurité, cloisonné pour protéger les déclarants."

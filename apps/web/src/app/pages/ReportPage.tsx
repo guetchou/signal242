@@ -17,6 +17,7 @@ export function ReportPage() {
 
       <div className="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
+          as="h1"
           eyebrow="Parcours citoyen"
           title="Déposer un signalement"
           description="Quatre étapes, moins de deux minutes. Aucun compte n’est requis : une référence de suivi vous est remise à la fin."

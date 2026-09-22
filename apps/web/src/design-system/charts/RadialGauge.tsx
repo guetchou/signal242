@@ -52,6 +52,9 @@ export function RadialGauge({
 
   const ratio = Math.min(Math.max((value - min) / (max - min), 0), 1);
   const valueAngle = START_ANGLE + ratio * SWEEP;
+  // À valeur nulle, l'arc dégénère en pastille colorée flottante : on n'affiche
+  // rien plutôt qu'une marque que l'utilisateur prendrait pour une mesure.
+  const hasValue = ratio > 0.001;
 
   return (
     <div className={cn('relative', className)}>
@@ -71,14 +74,16 @@ export function RadialGauge({
           strokeWidth="14"
           strokeLinecap="round"
         />
-        <path
-          d={arcPath(center, center, radius, START_ANGLE, Math.max(valueAngle, START_ANGLE + 0.5))}
-          fill="none"
-          stroke={`url(#${gradientId})`}
-          strokeWidth="14"
-          strokeLinecap="round"
-          className="transition-[d] duration-200"
-        />
+        {hasValue && (
+          <path
+            d={arcPath(center, center, radius, START_ANGLE, valueAngle)}
+            fill="none"
+            stroke={`url(#${gradientId})`}
+            strokeWidth="14"
+            strokeLinecap="round"
+            className="transition-[d] duration-200"
+          />
+        )}
 
         {threshold !== undefined && (
           <g>
@@ -93,8 +98,9 @@ export function RadialGauge({
                   y1={inner.y}
                   x2={outer.x}
                   y2={outer.y}
-                  stroke="var(--chart-surface)"
-                  strokeWidth="3"
+                  stroke="var(--chart-axis)"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
                 />
               );
             })()}
@@ -103,7 +109,12 @@ export function RadialGauge({
       </svg>
 
       <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center">
-        <span className="numeric text-5xl font-bold tracking-tighter text-primary">
+        <span
+          className={cn(
+            'numeric text-5xl font-bold tracking-tighter',
+            hasValue ? 'text-primary' : 'text-faint',
+          )}
+        >
           {value.toFixed(1)}
         </span>
         <span className="mt-0.5 font-mono text-xs uppercase tracking-[0.2em] text-muted">{unit}</span>

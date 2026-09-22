@@ -10,6 +10,7 @@ export function ConsolePage() {
       <div className="relative mx-auto max-w-[92rem] px-4 sm:px-6 lg:px-8">
         <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
           <SectionHeading
+          as="h1"
             eyebrow="Console agent"
             title="Supervision territoriale"
             description="Vue unique sur le portefeuille de signalements : charge par service, tenue des engagements et file de traitement priorisée."

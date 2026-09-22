@@ -48,6 +48,7 @@ export function TrackingPage() {
 
       <div className="relative mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
+          as="h1"
           eyebrow="Suivi citoyen"
           title="Où en est mon signalement ?"
           description="Saisissez la référence remise au dépôt. Aucun compte n’est nécessaire : la référence seule donne accès à l’avancement du dossier et à son engagement de délai."

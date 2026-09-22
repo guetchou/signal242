@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import type { ElementType, ReactNode } from 'react';
 import { cn } from '@/lib/cn';
 import { TONES, type Tone } from './tones';
 
@@ -8,6 +8,15 @@ export interface SectionHeadingProps {
   description?: ReactNode;
   tone?: Tone;
   align?: 'left' | 'center';
+  /**
+   * Niveau de titre.
+   *
+   * Une page porte exactement un `h1` : le titre principal de l'écran. Les
+   * sections qui la composent restent en `h2`, niveau par défaut. Ce réglage
+   * relève de la structure du document, non de la taille du texte, qui reste
+   * identique dans les deux cas.
+   */
+  as?: Extract<ElementType, 'h1' | 'h2'>;
   className?: string;
 }
 
@@ -18,6 +27,7 @@ export function SectionHeading({
   description,
   tone = 'signal',
   align = 'left',
+  as: Heading = 'h2',
   className,
 }: SectionHeadingProps) {
   const style = TONES[tone];
@@ -38,7 +48,7 @@ export function SectionHeading({
           </span>
         </div>
       )}
-      <h2 className="text-3xl font-bold sm:text-4xl lg:text-[2.75rem]">{title}</h2>
+      <Heading className="text-3xl font-bold sm:text-4xl lg:text-[2.75rem]">{title}</Heading>
       {description && (
         <p className={cn('max-w-2xl text-base leading-relaxed text-muted', align === 'center' && 'mx-auto')}>
           {description}
